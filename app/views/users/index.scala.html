@@ -1,21 +1,23 @@
 @import model.User
-@(user: User)
+@(user: User, tools: List[model.Tool])
 
 @main("HubCT") {
     <h1>Welcome  @user.username</h1>
 
-    <form action="@routes.Application.logout" method="get">
+    <form action="@routes.Application.logout()" method="get">
         <button>Logout</button>
     </form>
 
+
     <ul>
-        <li>Some Tool</li>
-        <li>Some Other Tool</li>
+        @for(t <- tools) {
+        <li>@t.name</li>
+        }
     </ul>
 
-    @*<form action="@routes.UserPage.create" method="get">*@
-        @*<button>Add Tools</button>*@
-    @*</form>*@
+    <form action="@routes.UserPage.create()" method="get">
+        <button>Add Tools</button>
+    </form>
 
 
 }

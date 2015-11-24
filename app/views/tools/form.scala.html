@@ -1,0 +1,22 @@
+@(message: String)
+
+@main("HubCT") {
+
+    <h2>@message</h2>
+
+    <form action="@routes.Tool.create()" method="post">
+        Toolname:<input type="text" name="tname"><br/>
+        Description:<input type="text" name="tdesc"><br/>
+        Tooltype:<select required name="typeList">
+                    <option value="hand">Hand Tools</option>
+                    <option value="power">Power Tools</option>
+                    <option value="garden">Gardening Tools</option>
+                    <option value="ladder">Ladders</option>
+                </select>
+        <br/>
+        <input type="submit" value="Add Tool">
+
+
+    </form>
+
+}

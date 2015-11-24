@@ -15,12 +15,12 @@ public class UserPage extends Controller {
         // Authenticated
         User user = User.find.byId(id);
         if (session().containsKey("user_id") && session().get("user_id").equals(user.id.toString()))
-            return ok(views.html.users.index.render(user));
+            return ok(views.html.users.index.render(user, user.toolsList));
         return redirect(routes.Application.index());
     }
 
-//    public result create() {
-//
-//    }
+    public Result create() {
+        return ok(views.html.tools.form.render("Anything"));
+    }
 
 }

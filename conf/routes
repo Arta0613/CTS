@@ -14,7 +14,7 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 # Users
 GET      /user                       controllers.UserPage.index(id: Long)
-#GET      /user/addtools              controllers.UserPage.create()
+GET      /user/addtools              controllers.UserPage.create()
 #GET     /index/new                  controllers.UserPage.form()
 #GET     /index/:id                  controllers.UserPage.show(id: Long)
 #DELETE  /index/:id                  controllers.UserPage.delete(id: Long)
@@ -28,7 +28,7 @@ GET      /user                       controllers.UserPage.index(id: Long)
 #DELETE  /tools/:id                  controllers.Tool.delete(id: Long)
 #GET     /tools/:id/edit             controllers.Tool.edit(id: Long)
 #PUT     /tools/:id                  controllers.Tool.update(id: Long)
-#POST    /tools                      controllers.Tool.create()
+POST    /tools                      controllers.Tool.create()
 #POST    /tools/comment              controllers.Tool.comment()
 
 ## Requests
