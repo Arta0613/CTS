@@ -1,12 +1,11 @@
 package controllers;
 
 import model.User;
-import play.*;
 import play.data.DynamicForm;
 import play.data.Form;
-import play.mvc.*;
-
-import views.html.*;
+import play.mvc.Controller;
+import play.mvc.Result;
+import views.html.index;
 
 public class Application extends Controller {
 
