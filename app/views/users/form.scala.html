@@ -1,0 +1,49 @@
+
+
+@main("HubCT") {
+
+<form action="@routes.Application.signup()" method="post">
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email">
+    <br>
+
+    <label for="confirm_email">Confirm Email</label>
+    <input type="email" name="confirm_email" id="confirm_email" onblur="confirmEmail()">
+    <br>
+
+    <script type="text/javascript">
+                function confirmEmail() {
+                    var email = document.getElementById("email").value;
+                    var confemail = document.getElementById("confirm_email").value;
+                    if(email != confemail) {
+                        alert('Email Not Matching!');
+                    }
+                }
+        </script>
+
+    <label for="username">Username</label>
+    <input type="text" name="username">
+    <br>
+
+    <label for="password">Password</label>
+    <input type="password" name="password">
+    <br>
+
+    <label for="confirm_password">Password</label>
+    <input type="password" name="confirm_password" id="confirm_password" onblur="confirmPassword()">
+    <br>
+
+    <script type="text/javascript">
+                function confirmPassword() {
+                    var password = document.getElementById("password").value;
+                    var confpassword = document.getElementById("confirm_password").value;
+                    if(password != confpassword) {
+                        alert('Passwords Not Matching!');
+                    }
+                }
+        </script>
+
+    <button>Sign Up</button>
+</form>
+
+}

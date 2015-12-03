@@ -22,8 +22,8 @@ public class ToolType extends Model {
     public String name;
 
     @OneToMany
-    public List<Tool> tools;
+    public List<Tool> toolList;
 
     // A finder object for easier querying
-    public static Finder<Long, ToolType> find = new Finder<>(ToolType.class);
+    public static Finder<Long, model.ToolType> find = new Finder<>(model.ToolType.class);
 }

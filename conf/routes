@@ -12,9 +12,9 @@ GET     /logout                           controllers.Application.logout()
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
-# Users
+# UserPage
 GET      /user                       controllers.UserPage.index(id: Long)
-GET      /user/addtools              controllers.UserPage.create()
+#GET      /user/comments/:id           controllers.UserPage.commentList(id:long)
 #GET     /index/new                  controllers.UserPage.form()
 #GET     /index/:id                  controllers.UserPage.show(id: Long)
 #DELETE  /index/:id                  controllers.UserPage.delete(id: Long)
@@ -22,14 +22,15 @@ GET      /user/addtools              controllers.UserPage.create()
 #PUT     /user/:id                   controllers.UserPage.update(id: Long)
 
 # Tools
-#GET     /tools                      controllers.Tool.index()
-#GET     /tools/new                  controllers.Tool.form()
-#GET     /tools/:id                  controllers.Tool.show(id: Long)
-#DELETE  /tools/:id                  controllers.Tool.delete(id: Long)
-#GET     /tools/:id/edit             controllers.Tool.edit(id: Long)
-#PUT     /tools/:id                  controllers.Tool.update(id: Long)
-POST    /tools                      controllers.Tool.create()
-#POST    /tools/comment              controllers.Tool.comment()
+GET     /tools                      controllers.Tools.index()
+#GET     /tools/new                  controllers.Tools.form()
+GET     /tools/:id                  controllers.Tools.show(id:Long)
+#DELETE  /tools/:id                  controllers.Tools.delete(id: Long)
+#GET     /tools/:id/edit             controllers.Tools.edit(id: Long)
+#PUT     /tools/:id                  controllers.Tools.update(id: Long)
+POST    /tools                      controllers.Tools.create()
+#POST    /tools/comments             controllers.Tools.createComment()
+#GET     /tools/comments/:id          controllers.Tools.showComment(id:Long)
 
 ## Requests
 #GET     /request                    controllers.Request.index()
@@ -41,9 +42,9 @@ POST    /tools                      controllers.Tool.create()
 #POST    /request                    controllers.Request.create()
 
 # ToolType
-#GET     /tooltype                     controllers.ToolType.index()
-#POST    /tooltype                     controllers.ToolType.create()
-#GET     /tooltype/:id                 controllers.ToolType.show(id:Long)
+GET     /tooltypes                     controllers.ToolTypes.index()
+POST    /tooltypes                     controllers.ToolTypes.create()
+GET     /tooltypes/:id                 controllers.ToolTypes.show(id:Long)
 
 ## Possibly projects
 #GET     /projects                   controllers.Project.index()
