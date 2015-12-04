@@ -2,14 +2,19 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
-    <head>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+    <script>
         <title>@title</title>
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
         <script src="@routes.Assets.versioned("javascripts/hello.js")" type="text/javascript"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-        <link rel='stylesheet' href='@routes.Assets.versioned("lib/bootstrap/css/bootstrap.min.css")'>
+
+        <link rel="stylesheet" type="text/css" media="screen"
+              href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
+
+        <script type="text/javascript"
+              href="@routes.Assets.versioned("javascripts/bootstrap.min.js")"></script>
     </head>
     <body>
         @* Display flash messages *@
@@ -21,7 +26,8 @@
             <p>Error Flash Message:</p>
             @flash.get("error")
         }
-
+        <div class="container">
         @content
+        </div>
     </body>
 </html>

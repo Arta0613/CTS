@@ -1,0 +1,39 @@
+@(tools: List[model.Tool], ttypes: List[model.ToolType])
+
+@main("Tools") {
+<form action="@routes.Tools.create()" method="post">
+    <label for="name">Tool Name:</label>
+    <input type="text" name="name">
+    <br>
+
+    <label for="tooltype_id">Type of Tool</label>
+    <select name="tooltype_id" id="tooltype">
+        @for(y <- ttypes) {
+        <option value="@y.id">@y.name</option>
+        }
+    </select>
+
+    <label for="description">Description of Tool:</label>
+    <input type="text" name="description">
+    <br>
+
+    <!-- FIGURE OUT HOW TO IMPLEMENT USER -->
+
+    <br>
+    <button>Submit</button>
+</form>
+
+@if(tools.isEmpty()) {
+<h2>No Tools available</h2>
+} else {
+<h2>Tool List</h2>
+<ul>
+    @for(t <- tools) {
+    <li><h5><a href="/tools/@t.id">@t.name</a></h5>
+        Type: @t.toolType.name
+        <br>Owner: @t.owner.username
+    </li>
+    }
+</ul>
+}
+}

@@ -1,0 +1,21 @@
+@(message: String)
+
+@main("HubCT") {
+
+<h2>@message</h2>
+
+@*<form action="@routes.Tools.comment()" method="post">*@
+
+    <br>
+    <label for="ctitle">Title</label> <br>
+    <input type="text" name="ctitle" />
+    <br />
+    <label for="cbody">Comment:</label> <br>
+    <textarea name="cbody" id="body" cols="30" rows="10"></textarea>
+    <br />
+    <input type="submit" value="Post Comment">
+
+
+@*</form>*@
+
+}

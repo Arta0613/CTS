@@ -34,11 +34,11 @@ public class User extends Model {
 
 
     @OneToMany(mappedBy = "user")
-    public List<Comments> commentsList = new ArrayList<>();
+    public List<Comment> commentsList = new ArrayList<>();
 
 
     // A finder object for easier querying
-    public static Finder<Long, User> find = new Finder<>(User.class);
+    public static Finder<Long, model.User> find = new Finder<>(model.User.class);
 
 
     // NOT FOR PRODUCTION - must ensure this is a valid user first. I have not done that.

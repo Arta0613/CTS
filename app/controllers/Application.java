@@ -7,10 +7,13 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.index;
 
+import java.util.List;
+
 public class Application extends Controller {
 
     public Result index() {
-        return ok(index.render("Welcome to HubCT"));
+
+        return ok(index.render(""));
     }
 
     public Result login() {

@@ -4,7 +4,9 @@
 
     <h1>@message</h1>
 
-
+<table>
+    <tr>
+        <td>
     <h3>Login Form</h3>
     <form action="@routes.Application.login()" method="post">
         <label for="username">Username</label>
@@ -17,7 +19,10 @@
 
         <button>Login</button>
     </form>
-
+        </td>
+        <td><br>
+        </td>
+        <td>
     <h3>Signup Form</h3>
     <form action="@routes.Application.signup()" method="post">
         <label for="email">Email</label>
@@ -62,7 +67,9 @@
 
         <button>Sign Up</button>
     </form>
-
+    </td>
+    </tr>
+</table>
 
 
 }
