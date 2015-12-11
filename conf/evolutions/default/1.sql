@@ -5,7 +5,6 @@
 
 create table comment (
   id                        bigint not null,
-  title                     varchar(255),
   body                      varchar(255),
   user_id                   bigint,
   tool_id                   bigint,
@@ -27,6 +26,14 @@ create table tool_type (
   constraint pk_tool_type primary key (id))
 ;
 
+create table transaction (
+  id                        bigint not null,
+  renter_id                 bigint,
+  to_borrow_id              bigint,
+  available                 boolean,
+  constraint pk_transaction primary key (id))
+;
+
 create table users (
   id                        bigint not null,
   username                  varchar(255),
@@ -43,6 +50,8 @@ create sequence tool_seq;
 
 create sequence tool_type_seq;
 
+create sequence transaction_seq;
+
 create sequence users_seq;
 
 alter table comment add constraint fk_comment_user_1 foreign key (user_id) references users (id) on delete restrict on update restrict;
@@ -53,6 +62,10 @@ alter table tool add constraint fk_tool_owner_3 foreign key (owner_id) reference
 create index ix_tool_owner_3 on tool (owner_id);
 alter table tool add constraint fk_tool_toolType_4 foreign key (tool_type_id) references tool_type (id) on delete restrict on update restrict;
 create index ix_tool_toolType_4 on tool (tool_type_id);
+alter table transaction add constraint fk_transaction_renter_5 foreign key (renter_id) references users (id) on delete restrict on update restrict;
+create index ix_transaction_renter_5 on transaction (renter_id);
+alter table transaction add constraint fk_transaction_to_borrow_6 foreign key (to_borrow_id) references tool (id) on delete restrict on update restrict;
+create index ix_transaction_to_borrow_6 on transaction (to_borrow_id);
 
 
 
@@ -66,6 +79,8 @@ drop table if exists tool;
 
 drop table if exists tool_type;
 
+drop table if exists transaction;
+
 drop table if exists users;
 
 SET REFERENTIAL_INTEGRITY TRUE;
@@ -75,6 +90,8 @@ drop sequence if exists comment_seq;
 drop sequence if exists tool_seq;
 
 drop sequence if exists tool_type_seq;
+
+drop sequence if exists transaction_seq;
 
 drop sequence if exists users_seq;
 

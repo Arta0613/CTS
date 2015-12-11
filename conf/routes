@@ -14,12 +14,13 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 # UserPage
 GET      /user                       controllers.UserPage.index(id: Long)
-#GET      /user/comments/:id           controllers.UserPage.commentList(id:long)
+#GET      /user/comments/:id         controllers.UserPage.commentList(id:long)
 #GET     /index/new                  controllers.UserPage.form()
 #GET     /index/:id                  controllers.UserPage.show(id: Long)
 #DELETE  /index/:id                  controllers.UserPage.delete(id: Long)
 #GET     /index/:id/edit             controllers.UserPage.edit(id: Long)
 #PUT     /user/:id                   controllers.UserPage.update(id: Long)
+POST     /user/transactions          controllers.UserPage.addTrans()
 
 # Tools
 GET     /tools                      controllers.Tools.index()
@@ -28,9 +29,9 @@ GET     /tools/:id                  controllers.Tools.show(id:Long)
 #DELETE  /tools/:id                  controllers.Tools.delete(id: Long)
 #GET     /tools/:id/edit             controllers.Tools.edit(id: Long)
 #PUT     /tools/:id                  controllers.Tools.update(id: Long)
-POST    /tools                      controllers.Tools.create()
-#POST    /tools/comments             controllers.Tools.createComment()
-#GET     /tools/comments/:id          controllers.Tools.showComment(id:Long)
+POST    /tools                       controllers.Tools.create()
+POST    /tools/comments              controllers.Tools.createComment()
+#GET     /tools/:id/comments/:num       controllers.Tools.showComment(id:Long, num:Long)
 
 ## Requests
 #GET     /request                    controllers.Request.index()
