@@ -12,8 +12,6 @@ public class Comment extends Model {
     @Id
     public Long id;
 
-    public String title;
-
     public String body;
 
     @ManyToOne
