@@ -6,9 +6,9 @@ import com.avaje.ebean.config.dbplatform.IdType;
 import com.avaje.ebean.config.dbplatform.PostgresPlatform;
 import com.avaje.ebean.event.ServerConfigStartup;
 
-/**
- * Created by dima on 12/11/15.
- */
+// This is needed to change the way Postgres handles
+// id generation
+
 public class MyServerConfigStartup implements ServerConfigStartup {
     @Override
     public void onStart(ServerConfig serverConfig) {
