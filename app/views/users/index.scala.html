@@ -5,7 +5,9 @@
 
     <form action="@routes.Application.logout()" method="get">
         <button>Logout</button>
+        <br>
     </form>
+
     <h3>My Tools:</h3>
     <ul>
         @for(t <- tools) {
@@ -14,8 +16,9 @@
     </ul>
 
 
+
     <form action="@routes.Tools.index()">
-        <button>Add Tools</button>
+        <button>Add Tool</button>
     </form>
 
     <form action="@routes.ToolTypes.index()">

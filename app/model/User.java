@@ -32,14 +32,14 @@ public class User extends Model {
     @OneToMany(mappedBy = "owner")
     public List<Tool> toolsList = new ArrayList<>();
 
-
     @OneToMany(mappedBy = "user")
     public List<Comment> commentsList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "renter")
+    public List<Transaction> transactionList = new ArrayList<>();
 
     // A finder object for easier querying
     public static Finder<Long, model.User> find = new Finder<>(model.User.class);
-
 
     // NOT FOR PRODUCTION - must ensure this is a valid user first. I have not done that.
     public boolean authenticate(String password) {
