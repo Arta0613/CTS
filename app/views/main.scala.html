@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/html">
-    <script>
+    <head>
         <title>@title</title>
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
@@ -11,10 +11,10 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
         <link rel="stylesheet" type="text/css" media="screen"
-              href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
+        href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
 
         <script type="text/javascript"
-              href="@routes.Assets.versioned("javascripts/bootstrap.min.js")"></script>
+        href="@routes.Assets.versioned("javascripts/bootstrap.min.js")"></script>
     </head>
     <body>
         @* Display flash messages *@
@@ -26,6 +26,14 @@
             <p>Error Flash Message:</p>
             @flash.get("error")
         }
+        <div id="tfheader">
+            <form id="tfnewsearch" method="get" action=@routes.Tools.search()>
+                <input type="text" class="tftextinput" name="search" size="20" maxlength="120">
+                <input type="submit" value="search" class="tfbutton">
+                <input type="hidden" name="previousURL" value="@request.uri()"/>
+            </form>
+        <div class="tfclear"></div>
+        </div>
         <div class="container">
         @content
         </div>

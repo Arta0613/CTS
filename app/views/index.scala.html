@@ -48,11 +48,12 @@
         <br>
 
         <label for="password">Password</label>
-        <input type="password" name="password">
+        <input type="password" name="password" pattern=".{8,}" required title="8 characters minimum">
         <br>
 
         <label for="confirm_password">Password</label>
-        <input type="password" name="confirm_password" id="confirm_password" onblur="confirmPassword()">
+        <input type="password" name="confirm_password" id="confirm_password" onblur="confirmPassword()"
+        pattern=".{8,}" required title="8 characters minimum">
         <br>
 
         <script type="text/javascript">

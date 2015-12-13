@@ -21,18 +21,18 @@ import static play.data.Form.form;
  */
 public class Tools extends Controller {
 
-    public Result index(){
+    public Result index() {
         List<model.Tool> tools = model.Tool.find.all();
         List<model.ToolType> tooltypes = model.ToolType.find.all();
         return ok(views.html.tools.index.render(tools, tooltypes));
     }
 
     @Security.Authenticated(UserAuth.class)
-    public Result create(){
+    public Result create() {
         Form<model.Tool> toolForm = form(model.Tool.class).bindFromRequest();
         String tooltype_id = toolForm.data().get("tooltype_id");
         model.ToolType tooltype = model.ToolType.find.byId(Long.parseLong(tooltype_id));
-        if(tooltype == null) {
+        if (tooltype == null) {
             flash("error", "Invalid Tool Type: " + tooltype_id + " Try again.");
             return redirect(routes.Tools.index());
         }
@@ -45,12 +45,12 @@ public class Tools extends Controller {
 
     }
 
-    public Result show(Long id){
+    public Result show(Long id) {
         model.Tool tool = model.Tool.find.byId(id);
         List<model.Comment> comments = tool.commentList;
         List<Transaction> transactions = tool.transactionList;
 
-        if(tool == null) {
+        if (tool == null) {
             return notFound("not found");
         } else {
 
@@ -58,14 +58,33 @@ public class Tools extends Controller {
         }
     }
 
-    public Result createComment(){
+    public Result createComment() {
         Form<model.Comment> commentForm = form(model.Comment.class).bindFromRequest();
         model.Comment comment = commentForm.get();
         String t_id = commentForm.data().get("tool_id");
         comment.tool = Tool.find.byId(Long.parseLong(t_id));
         comment.user = User.find.byId(Long.parseLong(session().get("user_id")));
         comment.save();
-            return redirect(routes.Tools.show(comment.tool.id));
+        return redirect(routes.Tools.show(comment.tool.id));
+    }
+
+    public Result search() {
+        DynamicForm searchForm = Form.form().bindFromRequest();
+        String searchString = searchForm.get("search");
+        List<model.Tool> tools = Tool.find.all();
+        List<model.ToolType> tooltypes = model.ToolType.find.all();
+        if (!searchString.isEmpty()) {
+            flash("success", searchString);
+            return ok(views.html.search.show.render(searchString, tools, tooltypes));
+        } else {
+            flash("error", "oh man =( you didn't search for anything");
+            //TODO: fill rest of cases
+            String previousURL = searchForm.get("previousURL");
+            if (previousURL.startsWith("/user")) {
+                return redirect(routes.UserPage.index(Integer.parseInt(session().get("user_id"))));
+            } else
+                return redirect(routes.Application.index());
+        }
     }
 
 

@@ -25,6 +25,7 @@ POST     /user/transactions          controllers.UserPage.addTrans()
 # Tools
 GET     /tools                      controllers.Tools.index()
 #GET     /tools/new                  controllers.Tools.form()
+GET     /tools/search                controllers.Tools.search()
 GET     /tools/:id                  controllers.Tools.show(id:Long)
 #DELETE  /tools/:id                  controllers.Tools.delete(id: Long)
 #GET     /tools/:id/edit             controllers.Tools.edit(id: Long)

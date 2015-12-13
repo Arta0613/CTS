@@ -1,0 +1,37 @@
+@import java.util
+@(searchString: String, tools: util.List[model.Tool], ttypes: util.List[model.ToolType])
+
+
+@main("Search") {
+   <div class="search-section">
+       <p>Search by category</p>
+       <form name="toolTypes" id="toolTypeId"></form>
+       <select name="tooltype_id" id="tooltype">
+           <option value="0011">All</option>
+           @for(y <- ttypes) {
+                <option value="@y.id">@y.name</option>
+            }
+       </select>
+       @if(tools.size() != 0) {
+           @*Show tools if it matches tooltype too?*@
+           @for( t <- tools) {
+               @if(searchString.equalsIgnoreCase(t.name)) {
+                   <li><a href="/tools/@t.id">@t.name</a></li>
+               }
+           }
+       }
+
+       <br />
+       <br />
+
+       @if(tools.size() != 0) {
+           <p>Couldn't find what you're looking for? Here are some of our latest tools.</p>
+           @*Implement logic for less than 5 items*@
+           @for( t <- tools.subList(tools.size() - 5, tools.size())) {
+               <li><a href="/tools/@t.id">@t.name</a></li>
+           }
+       } else {
+           <p>No tools in database =(</p>
+       }
+    </div>
+}
