@@ -9,14 +9,14 @@ import com.avaje.ebean.event.ServerConfigStartup;
 // This is needed to change the way Postgres handles
 // id generation
 
-public class MyServerConfigStartup implements ServerConfigStartup {
-    @Override
-    public void onStart(ServerConfig serverConfig) {
-        PostgresPlatform postgresPlatform = new PostgresPlatform();
-        DbIdentity dbIdentity = postgresPlatform.getDbIdentity();
-        dbIdentity.setSupportsGetGeneratedKeys(false);
-        dbIdentity.setSupportsSequence(true);
-        dbIdentity.setIdType(IdType.GENERATOR);
-        serverConfig.setDatabasePlatform(postgresPlatform);
-    }
-}
+//public class MyServerConfigStartup implements ServerConfigStartup {
+//    @Override
+//    public void onStart(ServerConfig serverConfig) {
+//        PostgresPlatform postgresPlatform = new PostgresPlatform();
+//        DbIdentity dbIdentity = postgresPlatform.getDbIdentity();
+//        dbIdentity.setSupportsGetGeneratedKeys(false);
+//        dbIdentity.setSupportsSequence(true);
+//        dbIdentity.setIdType(IdType.GENERATOR);
+//        serverConfig.setDatabasePlatform(postgresPlatform);
+//    }
+//}

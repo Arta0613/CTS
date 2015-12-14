@@ -4,18 +4,20 @@
 
 @main("Search") {
    <div class="search-section">
-       <p>Search by category</p>
-       <form name="toolTypes" id="toolTypeId"></form>
+       <p>Search by category:</p>
+       <form name="toolTypes" id="toolTypeId">
+       <label for="tooltype">Categories</label>
        <select name="tooltype_id" id="tooltype">
            <option value="0011">All</option>
            @for(y <- ttypes) {
                 <option value="@y.id">@y.name</option>
             }
        </select>
+       </form>
        @if(tools.size() != 0) {
            @*Show tools if it matches tooltype too?*@
            @for( t <- tools) {
-               @if(searchString.equalsIgnoreCase(t.name)) {
+               @if(t.name.toLowerCase().indexOf(searchString) != -1) {
                    <li><a href="/tools/@t.id">@t.name</a></li>
                }
            }
