@@ -26,6 +26,14 @@
             <p>Error Flash Message:</p>
             @flash.get("error")
         }
+        <div id="tfheader">
+            <form id="tfnewsearch" method="get" action=@routes.Tools.search()>
+                <input type="text" class="tftextinput" name="search" size="20" maxlength="120">
+                <input type="submit" value="search" class="tfbutton">
+                <input type="hidden" name="previousURL" value="@request.uri()"/>
+            </form>
+        <div class="tfclear"></div>
+        </div>
         <div class="container">
         @content
         </div>

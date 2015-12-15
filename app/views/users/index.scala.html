@@ -1,4 +1,4 @@
-@(user: model.User, tools: List[model.Tool])
+@(user: model.User, tools: List[model.Tool], trans: List[model.Transaction])
 
 @main("HubCT") {
     <h1>Welcome  @user.username</h1>
@@ -10,12 +10,33 @@
 
     <h3>My Tools:</h3>
     <ul>
-        @for(t <- tools) {
+        @for(t <- user.toolsList) {
         <li><a href="/tools/@t.id">@t.name</a></li>
         }
     </ul>
+    <h3>Borrowed Tools:</h3>
+    <ul>
+        @for(tr <- trans){
+        @for(tl <- tools){
+        @if(tr!=null && tr.to_borrow.id==tl.id && tr.renter.id==user.id){
 
+        <li><a href="/tools/@tl.id">@tl.name</a> Borrowed from: @tr.to_borrow.owner.username
+            <form action=@routes.UserPage.returnTool() method="get">
+                <button>Return Tool</button>
+                <input type="hidden" value="@tl.id" name="tool_id"/>
+            </form></li>
 
+        }else{ @if(tr==null){
+            <h4>No Tools Borrowed</h4>
+            }else{}
+        }
+        }
+        }
+    </ul>
+
+    <form action="@routes.Tools.index()">
+        <button>Borrow Tools</button>
+    </form>
 
     <form action="@routes.Tools.index()">
         <button>Add Tool</button>
