@@ -44,7 +44,10 @@ public class Tools extends Controller {
         return redirect(routes.Tools.index());
 
     }
-
+//    public Result form(){
+//        List<model.ToolType> tooltypes = model.ToolType.find.all();
+//        return ok(views.html.tools.form.render(tooltypes));
+//    }
     public Result show(Long id){
         model.Tool tool = model.Tool.find.byId(id);
         List<model.Comment> comments = tool.commentList;
@@ -68,7 +71,24 @@ public class Tools extends Controller {
             return redirect(routes.Tools.show(comment.tool.id));
     }
 
-
+    public Result search() {
+        DynamicForm searchForm = Form.form().bindFromRequest();
+        String searchString = searchForm.get("search");
+        List<model.Tool> tools = Tool.find.all();
+        List<model.ToolType> tooltypes = model.ToolType.find.all();
+        if (!searchString.isEmpty()) {
+            flash("success", searchString);
+            return ok(views.html.search.show.render(searchString, tools, tooltypes));
+        } else {
+            flash("error", "oh man =( you didn't search for anything");
+            //TODO: fill rest of cases
+            String previousURL = searchForm.get("previousURL");
+            if (previousURL.startsWith("/user")) {
+                return redirect(routes.UserPage.index(Integer.parseInt(session().get("user_id"))));
+            } else
+                return redirect(routes.Application.index());
+        }
+    }
     /* Future Possible Search Function
     public List<String> searchTools(String toolToSearch) {
         List<model.Tool> tools = model.Tool.find.all();
