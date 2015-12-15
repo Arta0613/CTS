@@ -20,7 +20,7 @@ public class Comment extends Model {
     @ManyToOne
     public Tool tool;
 
-    public static Finder<Long, model.Comment> find = new Finder<>(model.Comment.class);
+    public static Finder<Long, Comment> find = new Finder<>(Comment.class);
 
     /*public static Comment createNewComment(String name, String toolTypeName, String description, User owner) {
         Tools tool = new Tools();

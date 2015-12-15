@@ -25,5 +25,5 @@ public class ToolType extends Model {
     public List<Tool> toolList;
 
     // A finder object for easier querying
-    public static Finder<Long, model.ToolType> find = new Finder<>(model.ToolType.class);
+    public static Finder<Long, ToolType> find = new Finder<>(ToolType.class);
 }

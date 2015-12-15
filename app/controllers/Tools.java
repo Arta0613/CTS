@@ -22,21 +22,21 @@ import static play.data.Form.form;
 public class Tools extends Controller {
 
     public Result index(){
-        List<model.Tool> tools = model.Tool.find.all();
-        List<model.ToolType> tooltypes = model.ToolType.find.all();
+        List<Tool> tools = Tool.find.all();
+        List<ToolType> tooltypes = ToolType.find.all();
         return ok(views.html.tools.index.render(tools, tooltypes));
     }
 
     @Security.Authenticated(UserAuth.class)
     public Result create(){
-        Form<model.Tool> toolForm = form(model.Tool.class).bindFromRequest();
+        Form<Tool> toolForm = form(Tool.class).bindFromRequest();
         String tooltype_id = toolForm.data().get("tooltype_id");
-        model.ToolType tooltype = model.ToolType.find.byId(Long.parseLong(tooltype_id));
+        ToolType tooltype = ToolType.find.byId(Long.parseLong(tooltype_id));
         if(tooltype == null) {
             flash("error", "Invalid Tool Type: " + tooltype_id + " Try again.");
             return redirect(routes.Tools.index());
         }
-        model.Tool tool = toolForm.get();
+        Tool tool = toolForm.get();
         tool.toolType = tooltype;
         tool.owner = User.find.byId(Long.parseLong(session().get("user_id")));
         tool.save();
@@ -49,8 +49,8 @@ public class Tools extends Controller {
 //        return ok(views.html.tools.form.render(tooltypes));
 //    }
     public Result show(Long id){
-        model.Tool tool = model.Tool.find.byId(id);
-        List<model.Comment> comments = tool.commentList;
+        Tool tool = Tool.find.byId(id);
+        List<Comment> comments = tool.commentList;
         List<Transaction> transactions = tool.transactionList;
 
         if(tool == null) {
@@ -62,8 +62,8 @@ public class Tools extends Controller {
     }
 
     public Result createComment(){
-        Form<model.Comment> commentForm = form(model.Comment.class).bindFromRequest();
-        model.Comment comment = commentForm.get();
+        Form<Comment> commentForm = form(Comment.class).bindFromRequest();
+        Comment comment = commentForm.get();
         String t_id = commentForm.data().get("tool_id");
         comment.tool = Tool.find.byId(Long.parseLong(t_id));
         comment.user = User.find.byId(Long.parseLong(session().get("user_id")));
@@ -74,8 +74,8 @@ public class Tools extends Controller {
     public Result search() {
         DynamicForm searchForm = Form.form().bindFromRequest();
         String searchString = searchForm.get("search");
-        List<model.Tool> tools = Tool.find.all();
-        List<model.ToolType> tooltypes = model.ToolType.find.all();
+        List<Tool> tools = Tool.find.all();
+        List<ToolType> tooltypes = ToolType.find.all();
         if (!searchString.isEmpty()) {
             flash("success", searchString);
             return ok(views.html.search.show.render(searchString, tools, tooltypes));

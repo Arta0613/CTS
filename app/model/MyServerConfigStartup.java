@@ -1,4 +1,4 @@
-//package model;
+package model;//package model;
 //
 //import com.avaje.ebean.config.ServerConfig;
 //import com.avaje.ebean.config.dbplatform.DbIdentity;

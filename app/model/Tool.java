@@ -37,7 +37,7 @@ public class Tool extends Model {
     public List<Transaction> transactionList;
 
     // A finder object for easier querying
-    public static Finder<Long, model.Tool> find = new Finder<>(model.Tool.class);
+    public static Finder<Long, Tool> find = new Finder<>(Tool.class);
 
     }
 

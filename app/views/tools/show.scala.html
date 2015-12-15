@@ -1,4 +1,4 @@
-@(tool: model.Tool, comments: List[model.Comment], transaction: List[model.Transaction])
+@(tool: model.Tool, comments: List[model.Comment], transactions: List[model.Transaction])
 
 @main("Tool Types") {
 <table>
@@ -11,20 +11,21 @@
             <p>Owner: @tool.owner.username</p>
 
             <p>Description: <br>@tool.description</p>
-            @if(transaction.isEmpty){
-            <p>Available: True</p>
-            }else{
-            @if(!transaction.isEmpty && transaction.get(transaction.size()-1).Available){
-            <p>Available: True</p>
-            }else{
-            <p>Available: @transaction.get(transaction.size()-1).Available </p>
 
-            <p>Borrowed By: @transaction.get(transaction.size()-1).renter.username </p>
+            @if(tool.transactionList.isEmpty){
+                <p>Availability: Available</p>
+            }else{
+                @if(transactions.get(transactions.size()-1).Available){
+                    <p>Availability: Available</p>
+                        }else{<p>Availability: Borrowed</p>
+                    <p>Borrowed By: @transactions.get(transactions.size()-1).renter.username</p>
+                }
             }
-            }
+
+            <h3>Comments: </h3>
             @for(c <- comments) {
             <li>
-                Body: @c.body
+                @c.body
                 <br>Posted By: @c.user.username
             </li>
             }

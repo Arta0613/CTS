@@ -29,7 +29,7 @@ public class Transaction extends Model {
     public Boolean Available = true;
 
     // A finder object for easier querying
-    public static Finder<Long, model.Transaction> find = new Finder<>(model.Transaction.class);
+    public static Finder<Long, Transaction> find = new Finder<>(Transaction.class);
 
 
 }

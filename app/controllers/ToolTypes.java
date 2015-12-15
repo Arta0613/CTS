@@ -16,13 +16,13 @@ import java.util.List;
 public class ToolTypes extends Controller {
 
     public Result index() {
-        List<model.ToolType> tooltypes = model.ToolType.find.all();
+        List<ToolType> tooltypes = ToolType.find.all();
         return ok(views.html.tooltypes.index.render(tooltypes));
     }
 
     @Security.Authenticated(UserAuth.class)
     public Result create() {
-        model.ToolType tooltype = Form.form(model.ToolType.class).bindFromRequest().get();
+        ToolType tooltype = Form.form(ToolType.class).bindFromRequest().get();
         tooltype.save();
         flash("success", "Saved new Tool Type: " + tooltype.name);
         return redirect(routes.ToolTypes.index());
@@ -30,7 +30,7 @@ public class ToolTypes extends Controller {
     }
 
     public Result show(Long id){
-        model.ToolType tooltype = model.ToolType.find.byId(id);
+        ToolType tooltype = ToolType.find.byId(id);
         if(tooltype == null) {
             return notFound("not found");
         } else {
