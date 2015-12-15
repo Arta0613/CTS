@@ -6,7 +6,7 @@
     <input type="text" name="name">
     <br>
 
-    <label for="tooltype_id">Type of Tool</label>
+    <label for="tooltype_id">Category of Tool</label>
     <select name="tooltype_id" id="tooltype">
         @for(y <- ttypes) {
         <option value="@y.id">@y.name</option>
@@ -14,7 +14,7 @@
     </select>
 
     <label for="description">Description of Tool:</label>
-    <input type="text" name="description">
+    <input type="text" name="description" required>
 
     <br>
     <button>Submit</button>
