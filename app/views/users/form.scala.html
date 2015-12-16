@@ -1,6 +1,6 @@
+@main("Sign Up") {
 
-
-@main("HubCT") {
+<h3>Sign Up</h3>
 
 <form action="@routes.Application.signup()" method="post">
     <label for="email">Email</label>
@@ -46,4 +46,6 @@
     <button>Sign Up</button>
 </form>
 
+Or if you already have an account please
+<a href="@routes.Application.loginform()">Login</a>
 }

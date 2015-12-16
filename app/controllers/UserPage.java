@@ -8,6 +8,7 @@ import model.User;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import sun.rmi.runtime.Log;
 import views.html.index;
 
@@ -30,6 +31,7 @@ public class UserPage extends Controller {
         return redirect(routes.Application.index());
     }
 
+    @Security.Authenticated(UserAuth.class)
     public Result addTrans() {
         List<Transaction> trans = Transaction.find.all();
         Form<Transaction> transactionForm = form(Transaction.class).bindFromRequest();
@@ -100,4 +102,22 @@ public class UserPage extends Controller {
         return redirect(routes.UserPage.index(u.id));
     }
 
+    @Security.Authenticated(UserAuth.class)
+    public Result comments() {
+        User u = User.find.byId(Long.parseLong(session().get("user_id")));
+        return ok(views.html.comment.show.render(u.commentsList));
+    }
+
+    @Security.Authenticated(UserAuth.class)
+    public Result mytools() {
+        User u = User.find.byId(Long.parseLong(session().get("user_id")));
+        return ok(views.html.users.showT.render(u.toolsList));
+    }
+
+    @Security.Authenticated(UserAuth.class)
+    public Result mybortools(){
+        User u = User.find.byId(Long.parseLong(session().get("user_id")));
+        List<Tool> tools = Tool.find.all();
+        return ok(views.html.users.showB.render(u, tools, u.transactionList));
+    }
 }

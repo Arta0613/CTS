@@ -1,23 +1,24 @@
-@*<!--@(ttypes: List[model.ToolType])-->
+@(ttypes: List[model.ToolType])
 
-<!--@main("Add Tools"){-->
+@main("Add Tool"){
 
-<!--<form action="@routes.Tools.create()" method="post">-->
-    <!--<label for="name">Tool Name:</label>-->
-    <!--<input type="text" name="name">-->
-    <!--<br>-->
+<form action="@routes.Tools.create()" method="post">
+    <label for="name">Tool Name:</label>
+    <input type="text" name="name">
+    <br>
 
-    <!--<label for="tooltype_id">Type of Tool</label>-->
-    <!--<select name="tooltype_id" id="tooltype">-->
-        <!--@for(y <- ttypes) {-->
-        <!--<option value="@y.id">@y.name</option>-->
-        <!--}-->
-    <!--</select>-->
+    <label for="tooltype_id">Category of Tool</label>
+    <select name="tooltype_id" id="tooltype">
+        @for(y <- ttypes) {
+        <option value="@y.id">@y.name</option>
+        }
+    </select>
 
-    <!--<label for="description">Description of Tool:</label>-->
-    <!--<input type="text" name="description">-->
+    <label for="description">Description of Tool:</label>
+    <input type="text" name="description">
 
-    <!--<br>-->
-    <!--<button>Submit</button>-->
-<!--</form>-->
-<!--}-->*@
+    <br>
+    <button>Submit</button>
+</form>
+
+}

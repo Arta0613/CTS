@@ -1,0 +1,30 @@
+@(user: model.User, tools: List[model.Tool], trans: List[model.Transaction])
+
+@main("Borrowed"){
+
+<h3>My Borrowed Tools:</h3>
+
+@if(trans.isEmpty){
+    <h4>No Tools Borrowed</h4>
+    <form action="@routes.Tools.index()">
+        <button>Borrow Tools</button>
+    </form>
+}else{
+
+<ul>
+    @for(tr <- trans){
+    @for(tl <- tools){
+    @if(tr!=null && tr.to_borrow.id==tl.id && tr.renter.id==user.id){
+
+    <li><a href="/tools/@tl.id">@tl.name</a> Borrowed from: @tr.to_borrow.owner.username
+        <form action=@routes.UserPage.returnTool() method="post">
+            <button>Return Tool</button>
+            <input type="hidden" value="@tl.id" name="tool_id"/>
+        </form></li>
+    }
+    }
+    }
+
+</ul>
+}
+}

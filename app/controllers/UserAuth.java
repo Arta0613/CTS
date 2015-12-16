@@ -9,7 +9,7 @@ import play.mvc.Security;
  * Created by Arman on 11/18/15.
  */
 public class UserAuth  extends Security.Authenticator{
-    // When return is null, Authentication failed
+
     @Override
     public String getUsername(final Http.Context ctx) {
         String userIdStr = ctx.session().get("user_id");
@@ -22,7 +22,7 @@ public class UserAuth  extends Security.Authenticator{
     @Override
     public Result onUnauthorized(final Http.Context ctx) {
         ctx.flash().put("error",
-                "Nice try, but you need to log in first!");
-        return redirect(routes.Application.index());
+                "Please Login to Continue");
+        return redirect(routes.Application.loginform());
     }
 }
