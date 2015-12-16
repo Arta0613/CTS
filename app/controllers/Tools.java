@@ -12,6 +12,7 @@ import play.mvc.Security;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 import static play.data.Form.form;
 
@@ -72,11 +73,28 @@ public class Tools extends Controller {
             return redirect(routes.Tools.show(comment.tool.id));
     }
 
+    ToolType tooltype = null;
     public Result search() {
         DynamicForm searchForm = Form.form().bindFromRequest();
         String searchString = searchForm.get("search");
-        List<Tool> tools = Tool.find.all();
+
         List<ToolType> tooltypes = ToolType.find.all();
+        String tooltype_id = searchForm.data().get("tooltype");
+
+        // Buggy
+        if (!tooltype_id.equals("0")) {
+            tooltype = ToolType.find.byId(Long.parseLong(tooltype_id));
+        }
+        List<Tool> toolsAll = Tool.find.all();
+        List<Tool> tools = new ArrayList<>();
+        if (!toolsAll.isEmpty() && tooltype != null) {
+            tools.addAll(toolsAll.stream().filter(t -> t.toolType.name.equals(tooltype.name)).collect(Collectors.toList()));
+        } else {
+            tools = toolsAll;
+        }
+        if (searchString == null && searchForm.get("searchString") != null) {
+            searchString = searchForm.get("searchString");
+        }
         if (!searchString.isEmpty()) {
             flash("success", searchString);
             return ok(views.html.search.show.render(searchString, tools, tooltypes));

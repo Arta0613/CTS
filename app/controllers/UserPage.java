@@ -41,9 +41,9 @@ public class UserPage extends Controller {
         Tool t = Tool.find.byId(Long.parseLong(t_id));
         Long tool_id = t.id;
 
-        if(u.id.equals(t.owner.id)){
+        if (u.id.equals(t.owner.id)) {
             flash("error", "You can not borrow your own tools");
-            }else{
+        } else {
             t = null;
             Transaction currentTrans = null;
 
@@ -80,7 +80,7 @@ public class UserPage extends Controller {
                 }
             }
         }
-            return redirect(routes.Tools.show(tool_id));
+        return redirect(routes.Tools.show(tool_id));
     }
 
     public Result returnTool() {
@@ -91,12 +91,12 @@ public class UserPage extends Controller {
         User u = User.find.byId(Long.parseLong(session().get("user_id")));
         Tool t = Tool.find.byId(Long.parseLong(t_id));
 
-        for (Transaction tr: trans) {
-            if (tr.renter!=null && u.id.equals(tr.renter.id) && t.id.equals(tr.to_borrow.id)){
+        for (Transaction tr : trans) {
+            if (tr.renter != null && u.id.equals(tr.renter.id) && t.id.equals(tr.to_borrow.id)) {
                 tr.delete();
                 tr.Available = true;
                 tr.save();
-                flash("success" , "You returned: " + tr.to_borrow.name);
+                flash("success", "You returned: " + tr.to_borrow.name);
             }
         }
         return redirect(routes.UserPage.index(u.id));

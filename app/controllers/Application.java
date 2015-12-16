@@ -7,13 +7,15 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.index;
 
-import java.util.List;
-
 public class Application extends Controller {
 
     public Result index() {
 
         return ok(index.render());
+    }
+
+    public Result gsignup() {
+        return ok(views.html.users.form.render());
     }
 
     public Result login() {

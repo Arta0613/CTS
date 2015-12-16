@@ -1,20 +1,20 @@
 @(tooltype: model.ToolType, tools: List[model.Tool])
 
-@main("Tool Types") {
+    @main("Tool Types") {
 
-<h1>Tool Type: @tooltype.name</h1>
+        <h1>Tool Type: @tooltype.name</h1>
 
-@if(tools.isEmpty()) {
+        @if(tools.isEmpty()) {
 
-<h2>No tools are part of this type</h2>
-} else {
+            <h2>No tools are part of this type</h2>
+        } else {
 
-<h2>Tool list:</h2>
+            <h2>Tool list:</h2>
 
-<ul>
-    @for(t <- tools) {
-    <li>@t.name</li>
+            <ul>
+            @for( t <- tools) {
+                <li>@t.name</li>
+            }
+            </ul>
+        }
     }
-</ul>
-}
-}

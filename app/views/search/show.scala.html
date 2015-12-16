@@ -1,39 +1,61 @@
 @import java.util
 @(searchString: String, tools: util.List[model.Tool], ttypes: util.List[model.ToolType])
 
-
-@main("Search") {
-<div class="search-section">
-    <p>Search by category:</p>
-    <form name="toolTypes" id="toolTypeId">
-        <label for="tooltype">Categories</label>
-        <select name="tooltype_id" id="tooltype">
-            <option value="0011">All</option>
-            @for(y <- ttypes) {
-            <option value="@y.id">@y.name</option>
+    @main("Search") {
+        <div class="search-section">
+            <p>Search by category:</p>
+            <form action="@routes.Tools.search()" method="get">
+                <input type="hidden" value="@searchString.toString" name="searchString" id="searchString"/>
+                <label for="tooltype">Categories</label>
+                <select name="tooltype" id="tooltype">
+                @for( y <- ttypes) {
+                    <option value="@y.id">@y.name</option>
+                }
+                </select>
+                <input type="submit" value="search">
+            </form>
+            @if(tools.size() != 0) {
+                @for( t <- tools) {
+                    @if(t.name.toLowerCase().indexOf(searchString) != -1) {
+                        <li><a href="/tools/@t.id">@t.name</a></li>
+                    }
+                }
             }
-        </select>
-    </form>
-    @if(tools.size() != 0) {
-    @*Show tools if it matches tooltype too?*@
-    @for( t <- tools) {
-    @if(t.name.toLowerCase().indexOf(searchString) != -1) {
-    <li><a href="/tools/@t.id">@t.name</a></li>
-    }
-    }
-    }
 
-    <br />
-    <br />
+            <br />
+            <br />
 
-    @if(tools.size() != 0) {
-    <p>Couldn't find what you're looking for? Here are some of our latest tools.</p>
-    @*Implement logic for less than 5 items*@
-    @for( t <- tools.subList(tools.size() - 5, tools.size())) {
-    <li><a href="/tools/@t.id">@t.name</a></li>
+            @if(tools.size() != 0) {
+                <p>Couldn't find what you're looking for? Here are some of our latest tools.</p>
+                @tools.size() match {
+                    case 5 => {
+                        @for( t <- tools.subList(tools.size() - 5, tools.size())) {
+                            <li><a href="/tools/@t.id">@t.name</a></li>
+                        }
+                    }
+                    case 4 => {
+                        @for( t <- tools.subList(tools.size() - 4, tools.size())) {
+                            <li><a href="/tools/@t.id">@t.name</a></li>
+                        }
+                    }
+                    case 3 => {
+                        @for( t <- tools.subList(tools.size() - 3, tools.size())) {
+                            <li><a href="/tools/@t.id">@t.name</a></li>
+                        }
+                    }
+                    case 2 => {
+                        @for( t <- tools.subList(tools.size() - 2, tools.size())) {
+                            <li><a href="/tools/@t.id">@t.name</a></li>
+                        }
+                    }
+                    case 1 => {
+                        @for( t <- tools.subList(tools.size() - 1, tools.size())) {
+                            <li><a href="/tools/@t.id">@t.name</a></li>
+                        }
+                    }
+                }
+            } else {
+                <p>No tools in database =(</p>
+            }
+        </div>
     }
-    } else {
-    <p>No tools in database =(</p>
-    }
-</div>
-}

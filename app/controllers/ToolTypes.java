@@ -29,16 +29,15 @@ public class ToolTypes extends Controller {
 
     }
 
-    public Result show(Long id){
+    public Result show(Long id) {
         ToolType tooltype = ToolType.find.byId(id);
-        if(tooltype == null) {
+        if (tooltype == null) {
             return notFound("not found");
         } else {
             List<Tool> tools = tooltype.toolList;
             return ok(views.html.tooltypes.show.render(tooltype, tools));
         }
     }
-
 
 
 }

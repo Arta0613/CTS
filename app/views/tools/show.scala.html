@@ -1,54 +1,55 @@
 @(tool: model.Tool, comments: List[model.Comment], transactions: List[model.Transaction])
 
-@main("Tool Types") {
-<table>
-    <tr>
-        <td>
-            <h2>Tool: @tool.name</h2>
+    @main("Tool Types") {
+        <table>
+            <tr>
+                <td>
+                    <h2>Tool: @tool.name</h2>
 
-            <p>Type: @tool.toolType.name</p>
+                    <p>Type: @tool.toolType.name</p>
 
-            <p>Owner: @tool.owner.username</p>
+                    <p>Owner: @tool.owner.username</p>
 
-            <p>Description: <br>@tool.description</p>
+                    <p>Description: <br>@tool.description</p>
 
-            @if(tool.transactionList.isEmpty){
-                <p>Availability: Available</p>
-            }else{
-                @if(transactions.get(transactions.size()-1).Available){
-                    <p>Availability: Available</p>
-                        }else{<p>Availability: Borrowed</p>
-                    <p>Borrowed By: @transactions.get(transactions.size()-1).renter.username</p>
-                }
-            }
+                    @if(tool.transactionList.isEmpty) {
+                        <p>Availability: Available</p>
+                    } else {
+                        @if(transactions.get(transactions.size() - 1).Available) {
+                            <p>Availability: Available</p>
+                        } else {
+                            <p>Availability: Borrowed</p>
+                            <p>Borrowed By: @transactions.get(transactions.size() - 1).renter.username</p>
+                        }
+                    }
 
-            <h3>Comments: </h3>
-            @for(c <- comments) {
-            <li>
-                @c.body
-                <br>Posted By: @c.user.username
-            </li>
-            }
-        </td>
-        <td><br>
-            <br>
-        </td>
-        <td>
-            <br>
-            <br>
+                    <h3>Comments: </h3>
+                    @for( c <- comments) {
+                        <li>
+                            @c.body
+                        <br>Posted By: @c.user.username
+                        </li>
+                    }
+                </td>
+                <td><br>
+                    <br>
+                </td>
+                <td>
+                    <br>
+                    <br>
 
-            <form action=@routes.Tools.createComment() method="post">
-                <label for="body">Comment: </label>
-                <input type="text" name="body" required>
-                <br>
-                <input type="hidden" value="@tool.id" name="tool_id"/>
-                <button>Submit</button>
-            </form>
-            <form action=@routes.UserPage.addTrans() method="post">
-                <input type="hidden" value="@tool.id" name="tool_id"/>
-                <button>Borrow Me</button>
-            </form>
-        </td>
-    </tr>
-</table>
-}
+                    <form action=@routes.Tools.createComment() method="post">
+                        <label for="body">Comment: </label>
+                        <input type="text" name="body" required>
+                        <br>
+                        <input type="hidden" value="@tool.id" name="tool_id"/>
+                        <button>Submit</button>
+                    </form>
+                    <form action=@routes.UserPage.addTrans() method="post">
+                        <input type="hidden" value="@tool.id" name="tool_id"/>
+                        <button>Borrow Me</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    }

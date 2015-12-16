@@ -4,6 +4,7 @@
 
 # Home page
 GET     /                                 controllers.Application.index()
+GET     /signup                           controllers.Application.gsignup()
 POST    /login                            controllers.Application.login()
 GET     /login/new                        controllers.Application.loginform()
 GET     /signup/new                       controllers.Application.signupform()
@@ -21,6 +22,7 @@ GET      /user/mytools               controllers.UserPage.mytools()
 GET      /user/borrowedtools         controllers.UserPage.mybortools()
 POST     /user/transactions          controllers.UserPage.addTrans()
 POST     /user/returns               controllers.UserPage.returnTool()
+
 
 # Tools
 GET     /tools                      controllers.Tools.index()
