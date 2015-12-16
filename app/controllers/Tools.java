@@ -44,23 +44,24 @@ public class Tools extends Controller {
         return redirect(routes.Tools.index());
 
     }
-//    public Result form(){
-//        List<model.ToolType> tooltypes = model.ToolType.find.all();
-//        return ok(views.html.tools.form.render(tooltypes));
-//    }
+    public Result toolform(){
+        List<ToolType> tooltypes = ToolType.find.all();
+        return ok(views.html.tools.form.render(tooltypes));
+
+    }
     public Result show(Long id){
         Tool tool = Tool.find.byId(id);
         List<Comment> comments = tool.commentList;
         List<Transaction> transactions = tool.transactionList;
 
         if(tool == null) {
-            return notFound("not found");
+            return notFound("Not Avaiable");
         } else {
-
             return ok(views.html.tools.show.render(tool, comments, transactions));
         }
     }
 
+    @Security.Authenticated(UserAuth.class)
     public Result createComment(){
         Form<Comment> commentForm = form(Comment.class).bindFromRequest();
         Comment comment = commentForm.get();
@@ -89,20 +90,6 @@ public class Tools extends Controller {
                 return redirect(routes.Application.index());
         }
     }
-    /* Future Possible Search Function
-    public List<String> searchTools(String toolToSearch) {
-        List<model.Tool> tools = model.Tool.find.all();
-        List<String> arrayofTools = new ArrayList<>();
-        for (int i=0;i<tools.size();i++){
-            arrayofTools.add(tools.get(i).toString());
-        }
-        for (String tool : arrayofTools) {
-            System.out.println("This is the tool "+ tool);
-        }
-        return arrayofTools;
-    }
-    */
-
 }
 
 

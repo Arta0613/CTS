@@ -13,7 +13,7 @@ public class Application extends Controller {
 
     public Result index() {
 
-        return ok(index.render(""));
+        return ok(index.render());
     }
 
     public Result login() {
@@ -24,7 +24,7 @@ public class Application extends Controller {
         User user = User.find.where().eq("username", username).findUnique();
 
         if(user != null && user.authenticate(password)) {
-            flash("success", "Welcome back " + user.username);
+            flash("success", "Welcome " + user.username);
             session("user_id", user.id.toString());
             return redirect(routes.UserPage.index(user.id));
         } else {
@@ -59,14 +59,22 @@ public class Application extends Controller {
 
         user.save();
 
-        flash("success", "Welcome new user " + user.username);
+        flash("success", "Created new user " + user.username);
         session("user_id", user.id.toString());
-        return redirect(routes.Application.index());
+        return redirect(routes.UserPage.index(user.id));
     }
 
     public Result logout() {
         flash("success", "Logged out");
         session().remove("user_id");
         return redirect(routes.Application.index());
+    }
+
+    public Result loginform() {
+        return ok(views.html.loginfrom.render());
+    }
+
+    public Result signupform() {
+        return ok(views.html.users.form.render());
     }
 }

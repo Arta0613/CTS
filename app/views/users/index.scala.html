@@ -1,51 +1,46 @@
 @(user: model.User, tools: List[model.Tool], trans: List[model.Transaction])
 
-@main("HubCT") {
+@main("Tool HUB") {
     <h1>Welcome  @user.username</h1>
 
-    <form action="@routes.Application.logout()" method="get">
-        <button>Logout</button>
-        <br>
-    </form>
+    @**Left here for reference**@
 
-    <h3>My Tools:</h3>
-    <ul>
-        @for(t <- user.toolsList) {
-        <li><a href="/tools/@t.id">@t.name</a></li>
-        }
-    </ul>
-    <h3>Borrowed Tools:</h3>
-    <ul>
-        @for(tr <- trans){
-        @for(tl <- tools){
-        @if(tr!=null && tr.to_borrow.id==tl.id && tr.renter.id==user.id){
+    @*<!--<h3>My Tools:</h3>-->
+    <!--<ul>-->
+        <!--@for(t <- user.toolsList) {-->
+        <!--<li><a href="/tools/@t.id">@t.name</a></li>-->
+        <!--}-->
+    <!--</ul>-->
+    <!--<h3>Borrowed Tools:</h3>-->
+    <!--<ul>-->
+        <!--@for(tr <- trans){-->
+        <!--@for(tl <- tools){-->
+        <!--@if(tr!=null && tr.to_borrow.id==tl.id && tr.renter.id==user.id){-->
 
-        <li><a href="/tools/@tl.id">@tl.name</a> Borrowed from: @tr.to_borrow.owner.username
-            <form action=@routes.UserPage.returnTool() method="post">
-                <button>Return Tool</button>
-                <input type="hidden" value="@tl.id" name="tool_id"/>
-            </form></li>
+        <!--<li><a href="/tools/@tl.id">@tl.name</a> Borrowed from: @tr.to_borrow.owner.username-->
+            <!--<form action=@routes.UserPage.returnTool() method="post">-->
+                <!--<button>Return Tool</button>-->
+                <!--<input type="hidden" value="@tl.id" name="tool_id"/>-->
+            <!--</form></li>-->
 
-        }else{ @if(tr==null){
-            <h4>No Tools Borrowed</h4>
-            }else{}
-        }
-        }
-        }
-    </ul>
+        <!--}else{ @if(tr==null){-->
+            <!--<h4>No Tools Borrowed</h4>-->
+            <!--}else{}-->
+        <!--}-->
+        <!--}-->
+        <!--}-->
+    <!--</ul>-->*@
+    <h3>What you can do: </h3>
 
     <form action="@routes.Tools.index()">
         <button>Borrow Tools</button>
     </form>
 
-    <form action="@routes.Tools.index()">
-        <button>Add Tool</button>
+    <form action="@routes.Tools.toolform()">
+        <button>Add Tools</button>
     </form>
 
-    <form action="@routes.ToolTypes.index()">
-        <button>Add ToolType</button>
+    <form action="@routes.Application.logout()" method="get">
+        <button>Logout</button>
     </form>
-
-
-
 }

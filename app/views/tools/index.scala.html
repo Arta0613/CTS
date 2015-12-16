@@ -1,24 +1,27 @@
 @(tools: List[model.Tool], ttypes: List[model.ToolType])
 
 @main("Tools") {
-<form action="@routes.Tools.create()" method="post">
-    <label for="name">Tool Name:</label>
-    <input type="text" name="name">
-    <br>
 
-    <label for="tooltype_id">Category of Tool</label>
-    <select name="tooltype_id" id="tooltype">
-        @for(y <- ttypes) {
-        <option value="@y.id">@y.name</option>
-        }
-    </select>
+@******KEPT FOR REFERENCE*******@
 
-    <label for="description">Description of Tool:</label>
-    <input type="text" name="description" required>
+@*<!--<form action="@routes.Tools.create()" method="post">-->
+    <!--<label for="name">Tool Name:</label>-->
+    <!--<input type="text" name="name">-->
+    <!--<br>-->
 
-    <br>
-    <button>Submit</button>
-</form>
+    <!--<label for="tooltype_id">Category of Tool</label>-->
+    <!--<select name="tooltype_id" id="tooltype">-->
+        <!--@for(y <- ttypes) {-->
+        <!--<option value="@y.id">@y.name</option>-->
+        <!--}-->
+    <!--</select>-->
+
+    <!--<label for="description">Description of Tool:</label>-->
+    <!--<input type="text" name="description" required>-->
+
+    <!--<br>-->
+    <!--<button>Submit</button>-->
+<!--</form>-->*@
 
 @if(tools.isEmpty()) {
 <h2>No Tools available</h2>

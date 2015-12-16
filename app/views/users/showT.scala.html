@@ -1,0 +1,21 @@
+@(tools : List[model.Tool])
+
+@main("Tools"){
+
+<h2>My Tools: </h2>
+
+@if(tools.isEmpty){
+    <h4>No Tools Posted</h4>
+    <form action="@routes.Tools.toolform()">
+        <button>Add Tools</button>
+    </form>
+}else{
+    @for(t <- tools) {
+
+<li><h3><a href="/tools/@t.id">@t.name</a></h3>
+    Type: @t.toolType.name
+    <br>Owner: @t.owner.username
+</li>
+}
+}
+}

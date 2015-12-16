@@ -5,6 +5,8 @@
 # Home page
 GET     /                                 controllers.Application.index()
 POST    /login                            controllers.Application.login()
+GET     /login/new                        controllers.Application.loginform()
+GET     /signup/new                       controllers.Application.signupform()
 POST    /signup                           controllers.Application.signup()
 GET     /logout                           controllers.Application.logout()
 
@@ -14,18 +16,15 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 # UserPage
 GET      /user                       controllers.UserPage.index(id: Long)
-#GET      /user/comments/:id         controllers.UserPage.commentList(id:long)
-#GET     /index/new                  controllers.UserPage.form()
-#GET     /index/:id                  controllers.UserPage.show(id: Long)
-#DELETE  /index/:id                  controllers.UserPage.delete(id: Long)
-#GET     /index/:id/edit             controllers.UserPage.edit(id: Long)
-#PUT     /user/:id                   controllers.UserPage.update(id: Long)
+GET      /user/comments              controllers.UserPage.comments()
+GET      /user/mytools               controllers.UserPage.mytools()
+GET      /user/borrowedtools         controllers.UserPage.mybortools()
 POST     /user/transactions          controllers.UserPage.addTrans()
 POST     /user/returns               controllers.UserPage.returnTool()
 
 # Tools
 GET     /tools                      controllers.Tools.index()
-#GET     /tools/new                  controllers.Tools.form()
+GET     /tools/new                  controllers.Tools.toolform()
 GET     /tools/search               controllers.Tools.search()
 GET     /tools/:id                  controllers.Tools.show(id:Long)
 #DELETE  /tools/:id                  controllers.Tools.delete(id: Long)

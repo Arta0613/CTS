@@ -1,7 +1,18 @@
-@(comment: model.Comment)
+@(coms : List[model.Comment])
 
-<h2>Comments: </h2>
+@main("Comments"){
+<h2>My Comments: </h2>
 
-<p>By: @comment.user.username</p>
-<br>
-<p>@comment.body</p>
+@if(coms.isEmpty){
+    <h4>No Comments Posted</h4>
+}else{
+<ul>
+
+@for(c <- coms) {
+<li><h4>For: <a href="/tools/@c.tool.id">@c.tool.name</a></h4>
+Comment: @c.body
+    </li>
+    </ul>
+}
+}
+}

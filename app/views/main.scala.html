@@ -1,7 +1,8 @@
 @(title: String)(content: Html)
 
-<!DOCTYPE html>
 
+<!DOCTYPE html>
+<meta name=""viewport" content="width = device-width, initial-scale = 1">
 <html lang="en" xmlns="http://www.w3.org/1999/html">
     <script>
         <title>@title</title>
@@ -17,25 +18,78 @@
               href="@routes.Assets.versioned("javascripts/bootstrap.min.js")"></script>
     </head>
     <body>
-        @* Display flash messages *@
-        @if(flash.containsKey("success")) {
-            <p>Success Flash Message:</p>
-            @flash.get("success")
-        }
-        @if(flash.containsKey("error")) {
-            <p>Error Flash Message:</p>
-            @flash.get("error")
-        }
-        <div id="tfheader">
-            <form id="tfnewsearch" method="get" action=@routes.Tools.search()>
+        <div class="container-fluid" style="background-image: url('http://feelgrafix.com/data_images/out/16/906490-tools.jpg');">
+
+            <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="@routes.Application.index()">Tool HUB</a>
+            <div class="nav-collapse collapse">
+
+
+                <ul class="nav">
+                <!-- NEED TO ASK ABOUT THE USER PAGE HOW TO GET ID FROM MAIN -->
+                    <li><a href="/">My Page</a></li>
+                    <li><a href="/user/mytools">My Tools</a></li>
+                    <li><a href="/user/borrowedtools">My Borrowed Tools</a></li>
+                    <li><a href="/user/comments">My Comments</a></li>
+                </ul>
+                <div id="tfheader">
+            <form id="tfnewsearch" method="get" action=@routes.Tools.search() class="navbar-text pull-right">
                 <input type="text" class="tftextinput" name="search" size="20" maxlength="120">
                 <input type="submit" value="search" class="tfbutton">
                 <input type="hidden" name="previousURL" value="@request.uri()"/>
             </form>
-        <div class="tfclear"></div>
+            <div class="tfclear"></div>
         </div>
-        <div class="container">
-        @content
+                <p class="navbar-text">
+                    Logged in as <a href="/" class="navbar-link"></a>
+                </p>
+
+            </div><!--/.nav-collapse -->
         </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span2">
+            <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    <br>
+                    <li class="nav-header">Site Navigation</li>
+            <!-- SET THE ROUTES FOR LOGIN AND SIGNUP -->
+                    <li><a href="@routes.Application.loginform()">Login</a></li>
+                    <li><a href="@routes.Application.signupform()">Sign Up</a></li>
+                    <li><a href="@routes.Application.logout()">Log Out</a></li>
+                    <li><a href="@routes.Tools.index()">Borrow Tools</a></li>
+                    <li><a href="@routes.ToolTypes.index()">Add Tool Category</a></li>
+                </ul>
+            </div><!--/.well -->
+        </div><!--/span-->
+        <div class="span1">
+        </div>
+        <div class="span6">
+            <div class="hero-unit" style="background-color:">
+                @if(flash.containsKey("success")) {
+                <h3>Success:
+                @flash.get("success")</h3>
+                }
+                @if(flash.containsKey("error")) {
+                <h3>Error:
+                @flash.get("error")</h3>
+                }
+                @content
+            </div>
+        </div><!--/span-->
+    </div><!--/row-->
+    </div>
+    </div>
+
     </body>
 </html>
