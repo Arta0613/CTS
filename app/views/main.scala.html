@@ -3,7 +3,9 @@
 
 <!DOCTYPE html>
 <meta name=""viewport" content="width = device-width, initial-scale = 1">
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns="http://www.w3.org/1999/html" class="full">
+
+    <head>
     <script>
         <title>@title</title>
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
@@ -14,12 +16,15 @@
         <link rel="stylesheet" type="text/css" media="screen"
               href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
 
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+
         <script type="text/javascript"
               href="@routes.Assets.versioned("javascripts/bootstrap.min.js")"></script>
+
     </head>
     <body>
-        <div class="container-fluid" style="background-image: url('http://feelgrafix.com/data_images/out/16/906490-tools.jpg');">
-
+        <div class="full" style="">
+    <!-- NAVIGATION BAR ON TOP -->
             <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container-fluid">
@@ -30,8 +35,6 @@
             </button>
             <a class="brand" href="@routes.Application.index()">Tool HUB</a>
             <div class="nav-collapse collapse">
-
-
                 <ul class="nav">
                 <!-- NEED TO ASK ABOUT THE USER PAGE HOW TO GET ID FROM MAIN -->
                     <li><a href="/">My Page</a></li>
@@ -40,30 +43,31 @@
                     <li><a href="/user/comments">My Comments</a></li>
                 </ul>
                 <div id="tfheader">
-            <form id="tfnewsearch" method="get" action=@routes.Tools.search() class="navbar-text pull-right">
-                <input type="text" class="tftextinput" name="search" size="20" maxlength="120">
-                <input type="submit" value="search" class="tfbutton">
-                <input type="hidden" name="previousURL" value="@request.uri()"/>
-            </form>
-            <div class="tfclear"></div>
-        </div>
+                    <form id="tfnewsearch" method="get" action=@routes.Tools.search() class="navbar-text pull-right">
+                        <input type="text" class="tftextinput" name="search" size="20" maxlength="120">
+                        <input type="submit" value="search" class="tfbutton">
+                        <input type="hidden" name="previousURL" value="@request.uri()"/>
+                    </form>
+                    <div class="tfclear"></div>
+                </div>
                 <p class="navbar-text">
-                    Logged in as <a href="/" class="navbar-link"></a>
+                    Logged in as <a href="@routes.Application.loginform()" class="navbar-link">Please Login</a>
                 </p>
-
             </div><!--/.nav-collapse -->
         </div>
     </div>
-</div>
+    </div>
+<!-- NAVIGATION BAR ON TOP -->
 
+<!-- NAV AND CONTENT CONTAINER -->
 <div class="container-fluid">
     <div class="row-fluid">
-        <div class="span2">
+
+        <!-- SIDE BAR NAVIGATION -->
+        <div class="span2" style="opacity:0.9">
             <div class="well sidebar-nav">
                 <ul class="nav nav-list">
-                    <br>
                     <li class="nav-header">Site Navigation</li>
-            <!-- SET THE ROUTES FOR LOGIN AND SIGNUP -->
                     <li><a href="@routes.Application.loginform()">Login</a></li>
                     <li><a href="@routes.Application.signupform()">Sign Up</a></li>
                     <li><a href="@routes.Application.logout()">Log Out</a></li>
@@ -72,10 +76,12 @@
                 </ul>
             </div><!--/.well -->
         </div><!--/span-->
-        <div class="span1">
-        </div>
+
+        <!-- SIDE BAR NAVIGATION -->
+        <!-- OUR CONTENT -->
         <div class="span6">
-            <div class="hero-unit" style="background-color:">
+
+            <div class="hero-unit" style="background-color:white; opacity:0.85">
                 @if(flash.containsKey("success")) {
                 <h3>Success:
                 @flash.get("success")</h3>
@@ -86,10 +92,12 @@
                 }
                 @content
             </div>
+
         </div><!--/span-->
+        <!-- OUR CONTENT -->
     </div><!--/row-->
     </div>
+    <!-- NAV AND CONTENT CONTAINER -->
     </div>
-
     </body>
 </html>
