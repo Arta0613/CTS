@@ -1,10 +1,7 @@
 package controllers;
 
 
-import model.Comment;
-import model.Tool;
-import model.Transaction;
-import model.User;
+import model.*;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -25,11 +22,16 @@ public class UserPage extends Controller {
     public Result index(Long id) {
         // Authenticated
         User user = User.find.byId(id);
-        List<Tool> tools = Tool.find.all();
+        List<model.ToolType> toolTypes = ToolType.find.all();
         if (session().containsKey("user_id") && session().get("user_id").equals(user.id.toString()))
-            return ok(views.html.users.index.render(user, tools, user.transactionList));
+            return ok(views.html.users.index.render(user, toolTypes));
         return redirect(routes.Application.index());
     }
+
+//    public Result uheader() {
+//        User user = User.find.byId(Long.parseLong(session().get("user_id")));
+//        return ok(views.html.users.uheader.render(user));
+//    }
 
     @Security.Authenticated(UserAuth.class)
     public Result addTrans() {
@@ -105,19 +107,22 @@ public class UserPage extends Controller {
     @Security.Authenticated(UserAuth.class)
     public Result comments() {
         User u = User.find.byId(Long.parseLong(session().get("user_id")));
-        return ok(views.html.comment.show.render(u.commentsList));
+        List<model.ToolType> toolTypes = ToolType.find.all();
+        return ok(views.html.comment.show.render(u, u.commentsList, toolTypes));
     }
 
     @Security.Authenticated(UserAuth.class)
     public Result mytools() {
         User u = User.find.byId(Long.parseLong(session().get("user_id")));
-        return ok(views.html.users.showT.render(u.toolsList));
+        List<model.ToolType> toolTypes = ToolType.find.all();
+        return ok(views.html.users.showT.render(u, u.toolsList, toolTypes));
     }
 
     @Security.Authenticated(UserAuth.class)
     public Result mybortools(){
         User u = User.find.byId(Long.parseLong(session().get("user_id")));
         List<Tool> tools = Tool.find.all();
-        return ok(views.html.users.showB.render(u, tools, u.transactionList));
+        List<model.ToolType> toolTypes = ToolType.find.all();
+        return ok(views.html.users.showB.render(u, tools, toolTypes, u.transactionList));
     }
 }

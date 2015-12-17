@@ -22,16 +22,4 @@ public class Comment extends Model {
 
     public static Finder<Long, Comment> find = new Finder<>(Comment.class);
 
-    /*public static Comment createNewComment(String name, String toolTypeName, String description, User owner) {
-        Tools tool = new Tools();
-        tool.name = name;
-        ToolType toolType = new ToolType();
-        toolType.name = toolTypeName;
-        tool.toolType = toolType;
-        tool.description = description;
-        tool.owner = owner;
-
-        return tool;
-
-    }*/
 }

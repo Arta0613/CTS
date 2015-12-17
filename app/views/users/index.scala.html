@@ -1,46 +1,54 @@
-@(user: model.User, tools: List[model.Tool], trans: List[model.Transaction])
+@(user: model.User, ttypes: List[model.ToolType])
 
-@main("Tool HUB") {
-    <h1>Welcome  @user.username</h1>
+@users.main("Tool HUB") {
 
-    @**Left here for reference**@
+@uheader(user, ttypes)
 
-    @*<!--<h3>My Tools:</h3>-->
-    <!--<ul>-->
-        <!--@for(t <- user.toolsList) {-->
-        <!--<li><a href="/tools/@t.id">@t.name</a></li>-->
-        <!--}-->
-    <!--</ul>-->
-    <!--<h3>Borrowed Tools:</h3>-->
-    <!--<ul>-->
-        <!--@for(tr <- trans){-->
-        <!--@for(tl <- tools){-->
-        <!--@if(tr!=null && tr.to_borrow.id==tl.id && tr.renter.id==user.id){-->
+<div class="full" style="">
+    <!-- NAV AND CONTENT CONTAINER -->
+    <div class="container-fluid">
+        <div class="row-fluid">
 
-        <!--<li><a href="/tools/@tl.id">@tl.name</a> Borrowed from: @tr.to_borrow.owner.username-->
-            <!--<form action=@routes.UserPage.returnTool() method="post">-->
-                <!--<button>Return Tool</button>-->
-                <!--<input type="hidden" value="@tl.id" name="tool_id"/>-->
-            <!--</form></li>-->
+            <!-- SIDE BAR NAVIGATION -->
+            <div class="span2" style="opacity:0.9">
+                <div class="well sidebar-nav">
+                    <ul class="nav nav-list">
+                        <li class="nav-header">Site Navigation</li>
+                        <li><a href="@routes.Application.logout()">Log Out</a></li>
+                        <li><a href="@routes.Tools.index()">Borrow Tools</a></li>
+                        <li><a href="@routes.ToolTypes.index()">Add Tool Category</a></li>
+                    </ul>
+                </div><!--/.well -->
+            </div><!--/span-->
 
-        <!--}else{ @if(tr==null){-->
-            <!--<h4>No Tools Borrowed</h4>-->
-            <!--}else{}-->
-        <!--}-->
-        <!--}-->
-        <!--}-->
-    <!--</ul>-->*@
-    <h3>What you can do: </h3>
+            <!-- SIDE BAR NAVIGATION -->
+            <!-- OUR CONTENT -->
+            <div class="span6">
 
-    <form action="@routes.Tools.index()">
-        <button>Borrow Tools</button>
-    </form>
+                <div class="hero-unit" style="background-color:white; opacity:0.85">
+                    @if(flash.containsKey("success")) {
+                    <h3 align="center">Success:
+                        @flash.get("success")</h3>
+                    }
+                    @if(flash.containsKey("error")) {
+                    <h3 align="center">Error:
+                        @flash.get("error")</h3>
+                    }
+    <h1 align="center">Welcome @user.username</h1>
 
-    <form action="@routes.Tools.toolform()">
-        <button>Add Tools</button>
-    </form>
+    <h2 align="center">What you can do: </h2>
 
-    <form action="@routes.Application.logout()" method="get">
-        <button>Logout</button>
-    </form>
+    <h2 align="center"><a href="@routes.Tools.index()">Borrow Tools</a></h2>
+
+    <h2 align="center"><a href="@routes.Tools.toolform()">Add Tools</a></h2>
+
+    <h2 align="center"><a href="@routes.Application.logout()">Logout</a></h2>
+                </div>
+
+            </div><!--/span-->
+            <!-- OUR CONTENT -->
+        </div><!--/row-->
+    </div>
+    <!-- NAV AND CONTENT CONTAINER -->
+</div>
 }

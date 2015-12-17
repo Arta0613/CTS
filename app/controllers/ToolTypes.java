@@ -15,6 +15,7 @@ import java.util.List;
  */
 public class ToolTypes extends Controller {
 
+    @Security.Authenticated(UserAuth.class)
     public Result index() {
         List<ToolType> tooltypes = ToolType.find.all();
         return ok(views.html.tooltypes.index.render(tooltypes));

@@ -1,6 +1,7 @@
-@(ttypes: List[model.ToolType], user: model.User)
+@import java.util
+@(searchString: String, tools: util.List[model.Tool], ttypes: util.List[model.ToolType], user: model.User)
 
-@main("Add Tool"){
+@users.main("Search") {
 
 @uheader(user, ttypes)
 
@@ -34,35 +35,34 @@
                     <h3 align="center">Error:
                         @flash.get("error")</h3>
                     }
+<div class="search-section">
+    <p>Search by category:</p>
+    <form action="@routes.Tools.search()" method="get">
+        <input type="hidden" value="@searchString.toString" name="searchString" id="searchString"/>
+        <label for="tooltype">Categories</label>
+        <select name="tooltype" id="tooltype">
+            @for( y <- ttypes) {
+            <option value="@y.id">@y.name</option>
+            }
+        </select>
+        <input type="submit" value="search">
+    </form>
+    @if(tools.size() != 0) {
+    @for( t <- tools) {
+    @if(t.name.toLowerCase().indexOf(searchString) != -1) {
+    <li><a href="/tools/@t.id">@t.name</a></li>
+    }
+    }
+    }else{
+    <p>No tools in database =(</p>
+    }
+</div>
+</div>
 
-                    <h1 align="center"> Add Tool</h1>
-
-                    <h2 align="center">
-                        <form action="@routes.Tools.create()" method="post">
-                            <label for="name">Tool Name:</label>
-                            <input type="text" name="name">
-                            <br>
-
-                            <label for="tooltype_id">Category of Tool</label>
-                            <select name="tooltype_id" id="tooltype">
-                                @for(y <- ttypes) {
-                                <option value="@y.id">@y.name</option>
-                                }
-                            </select>
-
-                            <label for="description">Description of Tool:</label>
-                            <input type="text" name="description">
-
-                            <br>
-                            <button>Submit</button>
-                        </form>
-                    </h2>
-                </div>
-            </div><!--/span-->
-            <!-- OUR CONTENT -->
-
-        </div><!--/row-->
-    </div>
-    <!-- NAV AND CONTENT CONTAINER -->
+</div><!--/span-->
+<!-- OUR CONTENT -->
+</div><!--/row-->
+</div>
+<!-- NAV AND CONTENT CONTAINER -->
 </div>
 }

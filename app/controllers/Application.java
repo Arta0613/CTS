@@ -1,5 +1,7 @@
 package controllers;
 
+import model.Tool;
+import model.ToolType;
 import model.User;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -7,11 +9,19 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.index;
 
+import java.util.List;
+
 public class Application extends Controller {
 
     public Result index() {
-
-        return ok(index.render());
+        List<Tool> tools = Tool.find.all();
+        List<model.ToolType> toolTypes = ToolType.find.all();
+        if (session().containsKey("user_id")) {
+            User user = User.find.byId(Long.parseLong(session().get("user_id")));
+            if (session().containsKey("user_id") && session().get("user_id").equals(user.id.toString()))
+                return ok(views.html.uindex.render(user, tools, toolTypes));
+            }
+        return ok(index.render(tools, toolTypes));
     }
 
     public Result gsignup() {
@@ -31,7 +41,7 @@ public class Application extends Controller {
             return redirect(routes.UserPage.index(user.id));
         } else {
             flash("error", "Invalid login. Check your username and password.");
-            return redirect(routes.Application.index());
+            return redirect(routes.Application.loginform());
         }
 
     }
@@ -46,17 +56,17 @@ public class Application extends Controller {
 
         if (!email.equals(confirm_email)) {
             flash("error", "emails do no match\n" + email + " - " + confirm_email);
-            return redirect(routes.Application.index());
+            return redirect(routes.Application.signupform());
         } else if (!password.equals(confirm_password)) {
             flash("error", "passwords do no match\n" + password + " - " + confirm_password);
-            return redirect(routes.Application.index());
+            return redirect(routes.Application.signupform());
         }
 
         User user = User.createNewUser(username, password, email);
 
         if(user == null) {
-            flash("error", "Invalid user");
-            return redirect(routes.Application.index());
+            flash("error", "Please check your input and try again");
+            return redirect(routes.Application.signupform());
         }
 
         user.save();

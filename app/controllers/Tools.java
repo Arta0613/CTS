@@ -22,18 +22,24 @@ import static play.data.Form.form;
  */
 public class Tools extends Controller {
 
-    public Result index(){
+    public Result index() {
         List<Tool> tools = Tool.find.all();
-        List<ToolType> tooltypes = ToolType.find.all();
-        return ok(views.html.tools.index.render(tools, tooltypes));
+        List<model.ToolType> toolTypes = ToolType.find.all();
+        List<Transaction> transactions = Transaction.find.all();
+        if (session().containsKey("user_id")) {
+            User user = User.find.byId(Long.parseLong(session().get("user_id")));
+            if (session().containsKey("user_id") && session().get("user_id").equals(user.id.toString()))
+                return ok(views.html.tools.uindex.render(user, tools, toolTypes, transactions));
+        }
+        return ok(views.html.tools.index.render(tools, toolTypes));
     }
 
     @Security.Authenticated(UserAuth.class)
-    public Result create(){
+    public Result create() {
         Form<Tool> toolForm = form(Tool.class).bindFromRequest();
         String tooltype_id = toolForm.data().get("tooltype_id");
         ToolType tooltype = ToolType.find.byId(Long.parseLong(tooltype_id));
-        if(tooltype == null) {
+        if (tooltype == null) {
             flash("error", "Invalid Tool Type: " + tooltype_id + " Try again.");
             return redirect(routes.Tools.index());
         }
@@ -42,38 +48,46 @@ public class Tools extends Controller {
         tool.owner = User.find.byId(Long.parseLong(session().get("user_id")));
         tool.save();
         flash("success", "Saved new Tool: " + tool.name);
-        return redirect(routes.Tools.index());
+        return redirect(routes.UserPage.mytools());
 
     }
-    public Result toolform(){
+
+    public Result toolform() {
         List<ToolType> tooltypes = ToolType.find.all();
-        return ok(views.html.tools.form.render(tooltypes));
+        User user = User.find.byId(Long.parseLong(session().get("user_id")));
+        return ok(views.html.tools.form.render(tooltypes, user));
 
     }
-    public Result show(Long id){
+
+    public Result show(Long id) {
         Tool tool = Tool.find.byId(id);
         List<Comment> comments = tool.commentList;
         List<Transaction> transactions = tool.transactionList;
-
-        if(tool == null) {
+        List<model.ToolType> toolTypes = ToolType.find.all();
+        if (tool == null) {
             return notFound("Not Avaiable");
-        } else {
-            return ok(views.html.tools.show.render(tool, comments, transactions));
         }
+        if (session().containsKey("user_id")) {
+            User user = User.find.byId(Long.parseLong(session().get("user_id")));
+            if (session().containsKey("user_id") && session().get("user_id").equals(user.id.toString()))
+                return ok(views.html.tools.ushow.render(user, comments, transactions, tool, toolTypes));
+        }
+        return ok(views.html.tools.show.render(tool, comments, transactions));
     }
 
     @Security.Authenticated(UserAuth.class)
-    public Result createComment(){
+    public Result createComment() {
         Form<Comment> commentForm = form(Comment.class).bindFromRequest();
         Comment comment = commentForm.get();
         String t_id = commentForm.data().get("tool_id");
         comment.tool = Tool.find.byId(Long.parseLong(t_id));
         comment.user = User.find.byId(Long.parseLong(session().get("user_id")));
         comment.save();
-            return redirect(routes.Tools.show(comment.tool.id));
+        return redirect(routes.Tools.show(comment.tool.id));
     }
 
     ToolType tooltype = null;
+
     public Result search() {
         DynamicForm searchForm = Form.form().bindFromRequest();
         String searchString = searchForm.get("search");
@@ -96,6 +110,12 @@ public class Tools extends Controller {
             searchString = searchForm.get("searchString");
         }
         if (!searchString.isEmpty()) {
+            if (session().containsKey("user_id")) {
+                User user = User.find.byId(Long.parseLong(session().get("user_id")));
+                if (session().containsKey("user_id") && session().get("user_id").equals(user.id.toString()))
+                    flash("success", searchString);
+                return ok(views.html.search.ushow.render(searchString, tools, tooltypes, user));
+            }
             flash("success", searchString);
             return ok(views.html.search.show.render(searchString, tools, tooltypes));
         } else {

@@ -4,38 +4,38 @@
 # --- !Ups
 
 create table comment (
-  id                        bigserial not null,
+  id                        bigint not null,
   body                      varchar(255),
-  user_id                   bigserial,
-  tool_id                   bigserial,
+  user_id                   bigint,
+  tool_id                   bigint,
   constraint pk_comment primary key (id))
 ;
 
 create table tool (
-  id                        bigserial not null,
+  id                        bigint not null,
   name                      varchar(255),
   description               varchar(255),
-  owner_id                  bigserial,
-  tool_type_id              bigserial,
+  owner_id                  bigint,
+  tool_type_id              bigint,
   constraint pk_tool primary key (id))
 ;
 
 create table tool_type (
-  id                        bigserial not null,
+  id                        bigint not null,
   name                      varchar(255),
   constraint pk_tool_type primary key (id))
 ;
 
 create table transaction (
-  id                        bigserial not null,
-  renter_id                 bigserial,
-  to_borrow_id              bigserial,
+  id                        bigint not null,
+  renter_id                 bigint,
+  to_borrow_id              bigint,
   available                 boolean,
   constraint pk_transaction primary key (id))
 ;
 
 create table users (
-  id                        bigserial not null,
+  id                        bigint not null,
   username                  varchar(255),
   email                     varchar(255),
   password_hash             varchar(255),

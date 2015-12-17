@@ -1,6 +1,37 @@
 @(tool: model.Tool, comments: List[model.Comment], transactions: List[model.Transaction])
 
     @main("Tool Types") {
+<div class="full" style="">
+    <!-- NAV AND CONTENT CONTAINER -->
+    <div class="container-fluid">
+        <div class="row-fluid">
+
+            <!-- SIDE BAR NAVIGATION -->
+            <div class="span2" style="opacity:0.9">
+                <div class="well sidebar-nav">
+                    <ul class="nav nav-list">
+                        <li class="nav-header">Site Navigation</li>
+                        <li><a href="@routes.Application.loginform()">Login</a></li>
+                        <li><a href="@routes.Application.signupform()">Sign Up</a></li>
+                        <li><a href="@routes.Tools.index()">Tools</a></li>
+
+                    </ul>
+                </div><!--/.well -->
+            </div><!--/span-->
+
+            <!-- SIDE BAR NAVIGATION -->
+            <!-- OUR CONTENT -->
+            <div class="span6">
+
+                <div class="hero-unit" style="background-color:white; opacity:0.85">
+                    @if(flash.containsKey("success")) {
+                    <h3>Success:
+                        @flash.get("success")</h3>
+                    }
+                    @if(flash.containsKey("error")) {
+                    <h3>Error:
+                        @flash.get("error")</h3>
+                    }
         <table>
             <tr>
                 <td>
@@ -52,4 +83,12 @@
                 </td>
             </tr>
         </table>
+                </div>
+
+            </div><!--/span-->
+            <!-- OUR CONTENT -->
+        </div><!--/row-->
+    </div>
+    <!-- NAV AND CONTENT CONTAINER -->
+</div>
     }

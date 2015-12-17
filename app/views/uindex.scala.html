@@ -1,6 +1,8 @@
-@(tools: List[model.Tool], ttypes: List[model.ToolType])
+@(user: model.User, tools: List[model.Tool], ttypes: List[model.ToolType])
 
-@main("Tools") {
+@users.main("Tool CT") {
+
+@uheader(user, ttypes)
 
 <div class="full" style="">
     <!-- NAV AND CONTENT CONTAINER -->
@@ -12,10 +14,9 @@
                 <div class="well sidebar-nav">
                     <ul class="nav nav-list">
                         <li class="nav-header">Site Navigation</li>
-                        <li><a href="@routes.Application.loginform()">Login</a></li>
-                        <li><a href="@routes.Application.signupform()">Sign Up</a></li>
-                        <li><a href="@routes.Tools.index()">Tools</a></li>
-
+                        <li><a href="@routes.Application.logout()">Log Out</a></li>
+                        <li><a href="@routes.Tools.index()">Borrow Tools</a></li>
+                        <li><a href="@routes.ToolTypes.index()">Add Tool Category</a></li>
                     </ul>
                 </div><!--/.well -->
             </div><!--/span-->
@@ -26,26 +27,20 @@
 
                 <div class="hero-unit" style="background-color:white; opacity:0.85">
                     @if(flash.containsKey("success")) {
-                    <h3>Success:
+                    <h3 align="center">Success:
                         @flash.get("success")</h3>
                     }
                     @if(flash.containsKey("error")) {
-                    <h3>Error:
+                    <h3 align="center">Error:
                         @flash.get("error")</h3>
                     }
-@if(tools.isEmpty()) {
-<h2>No Tools available</h2>
-} else {
-<h2>Tool List</h2>
-<ul>
-    @for(t <- tools) {
-    <li><h5><a href="/tools/@t.id">@t.name</a></h5>
-        Type: @t.toolType.name
-        <br>Owner: @t.owner.username
-    </li>
-    }
-</ul>
-}
+                    <h1 align="center">Welcome to Tool CiTy</h1>
+                    <h2 align="center">A Sharing Service for all Tools</h2>
+
+
+
+
+
                 </div>
 
             </div><!--/span-->
