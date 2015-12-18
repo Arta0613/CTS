@@ -11,7 +11,6 @@ import play.mvc.Security;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 import java.util.stream.Collectors;
 
 import static play.data.Form.form;
@@ -47,7 +46,7 @@ public class Tools extends Controller {
         tool.toolType = tooltype;
         tool.owner = User.find.byId(Long.parseLong(session().get("user_id")));
         String imgURL = toolForm.data().get("imgURL");
-        tool.imgUrl = imgURL;
+        tool.image = imgURL;
         tool.save();
         flash("success", "Saved new Tool: " + tool.name);
         return redirect(routes.UserPage.mytools());

@@ -24,7 +24,7 @@ public class Tool extends Model {
     @Constraints.Required
     public String description;
 
-    public String imgUrl;
+    public String image;
 
     @ManyToOne
     public User owner;

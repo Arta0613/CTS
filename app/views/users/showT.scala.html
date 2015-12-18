@@ -42,7 +42,7 @@
                                 @for( t <- tools) {
 
                                     <li><h2><a href="/tools/@t.id">@t.name</a></h2>
-                                        <img src="@t.imgUrl">
+                                        <img src="@t.image">
                                         Type: @t.toolType.name
                                         <br>
                                         <form action="@routes.Tools.delete()" method="post">
