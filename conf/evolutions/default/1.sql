@@ -55,36 +55,32 @@ create sequence transaction_seq;
 
 create sequence users_seq;
 
-alter table comment add constraint fk_comment_user_1 foreign key (user_id) references users (id) on delete restrict on update restrict;
+alter table comment add constraint fk_comment_user_1 foreign key (user_id) references users (id);
 create index ix_comment_user_1 on comment (user_id);
-alter table comment add constraint fk_comment_tool_2 foreign key (tool_id) references tool (id) on delete restrict on update restrict;
+alter table comment add constraint fk_comment_tool_2 foreign key (tool_id) references tool (id);
 create index ix_comment_tool_2 on comment (tool_id);
-alter table tool add constraint fk_tool_owner_3 foreign key (owner_id) references users (id) on delete restrict on update restrict;
+alter table tool add constraint fk_tool_owner_3 foreign key (owner_id) references users (id);
 create index ix_tool_owner_3 on tool (owner_id);
-alter table tool add constraint fk_tool_toolType_4 foreign key (tool_type_id) references tool_type (id) on delete restrict on update restrict;
+alter table tool add constraint fk_tool_toolType_4 foreign key (tool_type_id) references tool_type (id);
 create index ix_tool_toolType_4 on tool (tool_type_id);
-alter table transaction add constraint fk_transaction_renter_5 foreign key (renter_id) references users (id) on delete restrict on update restrict;
+alter table transaction add constraint fk_transaction_renter_5 foreign key (renter_id) references users (id);
 create index ix_transaction_renter_5 on transaction (renter_id);
-alter table transaction add constraint fk_transaction_to_borrow_6 foreign key (to_borrow_id) references tool (id) on delete restrict on update restrict;
+alter table transaction add constraint fk_transaction_to_borrow_6 foreign key (to_borrow_id) references tool (id);
 create index ix_transaction_to_borrow_6 on transaction (to_borrow_id);
 
 
 
 # --- !Downs
 
-SET REFERENTIAL_INTEGRITY FALSE;
+drop table if exists comment cascade;
 
-drop table if exists comment;
+drop table if exists tool cascade;
 
-drop table if exists tool;
+drop table if exists tool_type cascade;
 
-drop table if exists tool_type;
+drop table if exists transaction cascade;
 
-drop table if exists transaction;
-
-drop table if exists users;
-
-SET REFERENTIAL_INTEGRITY TRUE;
+drop table if exists users cascade;
 
 drop sequence if exists comment_seq;
 
