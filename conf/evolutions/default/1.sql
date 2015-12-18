@@ -15,6 +15,7 @@ create table tool (
   id                        bigint not null,
   name                      varchar(255),
   description               varchar(255),
+  img_url                   varchar(255),
   owner_id                  bigint,
   tool_type_id              bigint,
   constraint pk_tool primary key (id))
