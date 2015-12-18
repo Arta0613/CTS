@@ -18,9 +18,6 @@ public class Tool extends Model {
     @Constraints.Required
     public String description;
 
-    @Constraints.Required
-    public String image;
-
     @ManyToOne
     public User owner;
 
@@ -32,6 +29,9 @@ public class Tool extends Model {
 
     @OneToMany(mappedBy = "to_borrow")
     public List<Transaction> transactionList;
+
+    @Constraints.Required
+    public String image;
 
     // A finder object for easier querying
     public static Finder<Long, Tool> find = new Finder<>(Tool.class);
