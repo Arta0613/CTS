@@ -1,0 +1,55 @@
+@import java.util
+@(searchedUser: model.User, loggedUser: model.User, ttypes: util.List[model.ToolType])
+@users.main("Search User Tools") {
+    @uheader(loggedUser, ttypes)
+
+    <div class="full" style="">
+            <!-- NAV AND CONTENT CONTAINER -->
+        <div class="container-fluid">
+            <div class="row-fluid">
+
+                    <!-- SIDE BAR NAVIGATION -->
+                <div class="span2" style="opacity:0.9">
+                    <div class="well sidebar-nav">
+                        <ul class="nav nav-list">
+                            <li class="nav-header">Site Navigation</li>
+                            <li><a href="@routes.Application.logout()">Log Out</a></li>
+                            <li><a href="@routes.Tools.index()">Borrow Tools</a></li>
+                            <li><a href="@routes.ToolTypes.index()">Add Tool Category</a></li>
+                        </ul>
+                    </div><!--/.well -->
+                </div><!--/span-->
+                <!-- SIDE BAR NAVIGATION -->
+
+                <div class="span6">
+                    <div class="hero-unit" style="background-color:white ; opacity:0.85">
+                        @if(flash.containsKey("success")) {
+                            <h3 align="center">Success:
+                                @flash.get("success")</h3>
+                        }
+                        @if(flash.containsKey("error")) {
+                            <h3 align="center">Error:
+                                @flash.get("error")</h3>
+                        }
+                        <h2 align="center">@searchedUser.username's Tools: </h2>
+
+                        @if(searchedUser.toolsList.isEmpty) {
+                            <h2 align="center">No Tools Posted</h2>
+                        } else {
+                            @for( t <- searchedUser.toolsList) {
+
+                                <li><h2><a href="/tools/@t.id">@t.name</a></h2>
+                                    <img src="@t.image">
+                                    Type: @t.toolType.name
+                                    <br>
+                                </li>
+                            }
+                        }
+                    </div>
+                </div>
+                    <!-- OUR CONTENT -->
+            </div><!--/row-->
+        </div>
+            <!-- NAV AND CONTENT CONTAINER -->
+    </div>
+}

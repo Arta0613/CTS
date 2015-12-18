@@ -30,7 +30,6 @@ public class Tool extends Model {
     @OneToMany(mappedBy = "to_borrow")
     public List<Transaction> transactionList;
 
-    @Constraints.Required
     public String image;
 
     // A finder object for easier querying

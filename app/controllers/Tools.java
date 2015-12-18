@@ -108,9 +108,7 @@ public class Tools extends Controller {
             } else {
                 tools = toolsAll;
             }
-            renderShow(searchString, tools, tooltypes);
-            flash("success", searchString);
-            return ok(views.html.search.show.render(searchString, tools, tooltypes));
+            return renderShow(searchString, tools, tooltypes);
         } else {
             searchString = searchForm.get("searchString");
             if (!tooltype_id.equals("0")) {
@@ -121,9 +119,7 @@ public class Tools extends Controller {
             } else {
                 tools = toolsAll;
             }
-            renderShow(searchString, tools, tooltypes);
-            flash("success", searchString);
-            return ok(views.html.search.show.render(searchString, tools, tooltypes));
+            return renderShow(searchString, tools, tooltypes);
         }
     }
 
@@ -133,12 +129,21 @@ public class Tools extends Controller {
         return redirect(routes.UserPage.mytools());
     }
 
+    public Result searchUserTools() {
+        DynamicForm userSelect = Form.form().bindFromRequest();
+        String user_id = userSelect.data().get("user");
+        User loggedUser = User.find.byId(Long.parseLong(session().get("user_id")));
+        User searchedUser = User.find.byId(Long.parseLong(user_id));
+        return ok(views.html.search.ushowuserstools.render(searchedUser, loggedUser, ToolType.find.all()));
+    }
+
     private Result renderShow(String searchString, List<Tool> tools, List<ToolType> tooltypes) {
         if (session().containsKey("user_id")) {
+            List<User> users = User.find.all();
             User user = User.find.byId(Long.parseLong(session().get("user_id")));
             if (session().containsKey("user_id") && session().get("user_id").equals(user.id.toString()))
                 flash("success", searchString);
-            return ok(views.html.search.ushow.render(searchString, tools, tooltypes, user));
+            return ok(views.html.search.ushow.render(searchString, tools, tooltypes, user, users));
         }
         flash("success", searchString);
         return ok(views.html.search.show.render(searchString, tools, tooltypes));
