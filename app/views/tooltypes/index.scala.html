@@ -2,22 +2,22 @@
 
 
 
-    @main("Tool Types") {
+@main("Tool Types") {
 
-        <h2>Add a Tool Type</h2>
-        <form action="@routes.ToolTypes.create()" method="post">
-            <input type="text" name="name">
-            <button>Submit</button>
-        </form>
+    <h2>Add a Tool Type</h2>
+    <form action="@routes.ToolTypes.create()" method="post">
+        <input type="text" name="name">
+        <button>Submit</button>
+    </form>
 
-        @if(tooltypes.isEmpty()) {
-            <h2>No Tool Types available</h2>
-        } else {
-            <h2>Types List</h2>
-            <ul>
-            @for( t <- tooltypes) {
-                <li>@t.name</li>
-            }
-            </ul>
+    @if(tooltypes.isEmpty()) {
+        <h2>No Tool Types available</h2>
+    } else {
+        <h2>Types List</h2>
+        <ul>
+        @for( t <- tooltypes) {
+            <li>@t.name</li>
         }
+        </ul>
     }
+}

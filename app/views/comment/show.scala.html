@@ -1,59 +1,59 @@
-@(user: model.User, coms : List[model.Comment], ttypes: List[model.ToolType])
+@(user: model.User, coms: List[model.Comment], ttypes: List[model.ToolType])
 
-@users.main("Comments"){
+    @users.main("Comments") {
 
-@uheader(user, ttypes)
+        @uheader(user, ttypes)
 
-<div class="full" style="">
-    <!-- NAV AND CONTENT CONTAINER -->
-    <div class="container-fluid">
-        <div class="row-fluid">
+        <div class="full" style="">
+                <!-- NAV AND CONTENT CONTAINER -->
+            <div class="container-fluid">
+                <div class="row-fluid">
 
-            <!-- SIDE BAR NAVIGATION -->
-            <div class="span2" style="opacity:0.9">
-                <div class="well sidebar-nav">
-                    <ul class="nav nav-list">
-                        <li class="nav-header">Site Navigation</li>
-                        <li><a href="@routes.Application.logout()">Log Out</a></li>
-                        <li><a href="@routes.Tools.index()">Borrow Tools</a></li>
-                        <li><a href="@routes.ToolTypes.index()">Add Tool Category</a></li>
-                    </ul>
-                </div><!--/.well -->
-            </div><!--/span-->
+                        <!-- SIDE BAR NAVIGATION -->
+                    <div class="span2" style="opacity:0.9">
+                        <div class="well sidebar-nav">
+                            <ul class="nav nav-list">
+                                <li class="nav-header">Site Navigation</li>
+                                <li><a href="@routes.Application.logout()">Log Out</a></li>
+                                <li><a href="@routes.Tools.index()">Borrow Tools</a></li>
+                                <li><a href="@routes.ToolTypes.index()">Add Tool Category</a></li>
+                            </ul>
+                        </div><!--/.well -->
+                    </div><!--/span-->
 
-            <!-- SIDE BAR NAVIGATION -->
-            <!-- OUR CONTENT -->
-            <div class="span6">
+                    <!-- SIDE BAR NAVIGATION -->
+                    <!-- OUR CONTENT -->
+                    <div class="span6">
 
-                <div class="hero-unit" style="background-color:white; opacity:0.85">
-                    @if(flash.containsKey("success")) {
-                    <h3 align="center">Success:
-                        @flash.get("success")</h3>
-                    }
-                    @if(flash.containsKey("error")) {
-                    <h3 align="center">Error:
-                        @flash.get("error")</h3>
-                    }
-<h2 align="center">My Comments: </h2>
+                        <div class="hero-unit" style="background-color:white ; opacity:0.85">
+                            @if(flash.containsKey("success")) {
+                                <h3 align="center">Success:
+                                    @flash.get("success")</h3>
+                            }
+                            @if(flash.containsKey("error")) {
+                                <h3 align="center">Error:
+                                    @flash.get("error")</h3>
+                            }
+                            <h2 align="center">My Comments: </h2>
 
-@if(coms.isEmpty){
-    <h3 align="center">No Comments Posted</h3>
-}else{
-<ul>
+                            @if(coms.isEmpty) {
+                                <h3 align="center">No Comments Posted</h3>
+                            } else {
+                                <ul>
 
-@for(c <- coms) {
-<li><h3 align="center">For: <a href="/tools/@c.tool.id">@c.tool.name</a></h3>
-Comment: @c.body
-    </li>
-    </ul>
-}
-}
-                </div>
+                                @for( c <- coms) {
+                                    <li><h3 align="center">For: <a href="/tools/@c.tool.id">@c.tool.name</a></h3>
+                                        Comment: @c.body
+                                    </li>
+                                </ul>
+                            }
+                            }
+                        </div>
 
-            </div><!--/span-->
-            <!-- OUR CONTENT -->
-        </div><!--/row-->
-    </div>
-    <!-- NAV AND CONTENT CONTAINER -->
-</div>
-}
+                    </div><!--/span-->
+                    <!-- OUR CONTENT -->
+                </div><!--/row-->
+            </div>
+                <!-- NAV AND CONTENT CONTAINER -->
+        </div>
+    }

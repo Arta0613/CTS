@@ -1,68 +1,71 @@
 @(ttypes: List[model.ToolType], user: model.User)
 
-@main("Add Tool"){
+    @main("Add Tool") {
 
-@uheader(user, ttypes)
+        @uheader(user, ttypes)
 
-<div class="full" style="">
-    <!-- NAV AND CONTENT CONTAINER -->
-    <div class="container-fluid">
-        <div class="row-fluid">
+        <div class="full" style="">
+                <!-- NAV AND CONTENT CONTAINER -->
+            <div class="container-fluid">
+                <div class="row-fluid">
 
-            <!-- SIDE BAR NAVIGATION -->
-            <div class="span2" style="opacity:0.9">
-                <div class="well sidebar-nav">
-                    <ul class="nav nav-list">
-                        <li class="nav-header">Site Navigation</li>
-                        <li><a href="@routes.Application.logout()">Log Out</a></li>
-                        <li><a href="@routes.Tools.index()">Borrow Tools</a></li>
-                        <li><a href="@routes.ToolTypes.index()">Add Tool Category</a></li>
-                    </ul>
-                </div><!--/.well -->
-            </div><!--/span-->
-            <!-- SIDE BAR NAVIGATION -->
+                        <!-- SIDE BAR NAVIGATION -->
+                    <div class="span2" style="opacity:0.9">
+                        <div class="well sidebar-nav">
+                            <ul class="nav nav-list">
+                                <li class="nav-header">Site Navigation</li>
+                                <li><a href="@routes.Application.logout()">Log Out</a></li>
+                                <li><a href="@routes.Tools.index()">Borrow Tools</a></li>
+                                <li><a href="@routes.ToolTypes.index()">Add Tool Category</a></li>
+                            </ul>
+                        </div><!--/.well -->
+                    </div><!--/span-->
+                    <!-- SIDE BAR NAVIGATION -->
 
-            <!-- OUR CONTENT -->
-            <div class="span6">
+                    <!-- OUR CONTENT -->
+                    <div class="span6">
 
-                <div class="hero-unit" style="background-color:white; opacity:0.85">
-                    @if(flash.containsKey("success")) {
-                    <h3 align="center">Success:
-                        @flash.get("success")</h3>
-                    }
-                    @if(flash.containsKey("error")) {
-                    <h3 align="center">Error:
-                        @flash.get("error")</h3>
-                    }
+                        <div class="hero-unit" style="background-color:white ; opacity:0.85">
+                            @if(flash.containsKey("success")) {
+                                <h3 align="center">Success:
+                                    @flash.get("success")</h3>
+                            }
+                            @if(flash.containsKey("error")) {
+                                <h3 align="center">Error:
+                                    @flash.get("error")</h3>
+                            }
 
-                    <h1 align="center"> Add Tool</h1>
+                            <h1 align="center"> Add Tool</h1>
 
-                    <h2 align="center">
-                        <form action="@routes.Tools.create()" method="post">
-                            <label for="name">Tool Name:</label>
-                            <input type="text" name="name">
-                            <br>
+                            <h2 align="center">
+                                <form action="@routes.Tools.create()" method="post">
+                                    <label for="name">Tool Name:</label>
+                                    <input type="text" name="name">
+                                    <br>
 
-                            <label for="tooltype_id">Category of Tool</label>
-                            <select name="tooltype_id" id="tooltype">
-                                @for(y <- ttypes) {
-                                <option value="@y.id">@y.name</option>
-                                }
-                            </select>
+                                    <label for="tooltype_id">Category of Tool</label>
+                                    <select name="tooltype_id" id="tooltype">
+                                    @for( y <- ttypes) {
+                                        <option value="@y.id">@y.name</option>
+                                    }
+                                    </select>
 
-                            <label for="description">Description of Tool:</label>
-                            <input type="text" name="description">
+                                    <label for="description">Description of Tool:</label>
+                                    <input type="text" name="description">
 
-                            <br>
-                            <button>Submit</button>
-                        </form>
-                    </h2>
-                </div>
-            </div><!--/span-->
-            <!-- OUR CONTENT -->
+                                    <label for="imgUrl">Image Url for tool:</label>
+                                    <input type="text" name="Image Url">
 
-        </div><!--/row-->
-    </div>
-    <!-- NAV AND CONTENT CONTAINER -->
-</div>
-}
+                                    <br>
+                                    <button>Submit</button>
+                                </form>
+                            </h2>
+                        </div>
+                    </div><!--/span-->
+                    <!-- OUR CONTENT -->
+
+                </div><!--/row-->
+            </div>
+                <!-- NAV AND CONTENT CONTAINER -->
+        </div>
+    }

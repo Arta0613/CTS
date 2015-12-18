@@ -119,7 +119,7 @@ public class UserPage extends Controller {
     }
 
     @Security.Authenticated(UserAuth.class)
-    public Result mybortools(){
+    public Result mybortools() {
         User u = User.find.byId(Long.parseLong(session().get("user_id")));
         List<Tool> tools = Tool.find.all();
         List<model.ToolType> toolTypes = ToolType.find.all();

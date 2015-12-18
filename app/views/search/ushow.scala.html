@@ -1,68 +1,75 @@
 @import java.util
 @(searchString: String, tools: util.List[model.Tool], ttypes: util.List[model.ToolType], user: model.User)
 
-@users.main("Search") {
+    @users.main("Search") {
 
-@uheader(user, ttypes)
+        @uheader(user, ttypes)
 
-<div class="full" style="">
-    <!-- NAV AND CONTENT CONTAINER -->
-    <div class="container-fluid">
-        <div class="row-fluid">
+        <div class="full" style="">
+                <!-- NAV AND CONTENT CONTAINER -->
+            <div class="container-fluid">
+                <div class="row-fluid">
 
-            <!-- SIDE BAR NAVIGATION -->
-            <div class="span2" style="opacity:0.9">
-                <div class="well sidebar-nav">
-                    <ul class="nav nav-list">
-                        <li class="nav-header">Site Navigation</li>
-                        <li><a href="@routes.Application.logout()">Log Out</a></li>
-                        <li><a href="@routes.Tools.index()">Borrow Tools</a></li>
-                        <li><a href="@routes.ToolTypes.index()">Add Tool Category</a></li>
-                    </ul>
-                </div><!--/.well -->
-            </div><!--/span-->
-            <!-- SIDE BAR NAVIGATION -->
+                        <!-- SIDE BAR NAVIGATION -->
+                    <div class="span2" style="opacity:0.9">
+                        <div class="well sidebar-nav">
+                            <ul class="nav nav-list">
+                                <li class="nav-header">Site Navigation</li>
+                                <li><a href="@routes.Application.logout()">Log Out</a></li>
+                                <li><a href="@routes.Tools.index()">Borrow Tools</a></li>
+                                <li><a href="@routes.ToolTypes.index()">Add Tool Category</a></li>
+                            </ul>
+                        </div><!--/.well -->
+                    </div><!--/span-->
+                    <!-- SIDE BAR NAVIGATION -->
 
-            <!-- OUR CONTENT -->
-            <div class="span6">
+                    <!-- OUR CONTENT -->
+                    <div class="span6">
 
-                <div class="hero-unit" style="background-color:white; opacity:0.85">
-                    @if(flash.containsKey("success")) {
-                    <h3 align="center">Success:
-                        @flash.get("success")</h3>
-                    }
-                    @if(flash.containsKey("error")) {
-                    <h3 align="center">Error:
-                        @flash.get("error")</h3>
-                    }
-<div class="search-section">
-    <p>Search by category:</p>
-    <form action="@routes.Tools.search()" method="get">
-        <input type="hidden" value="@searchString.toString" name="searchString" id="searchString"/>
-        <label for="tooltype">Categories</label>
-        <select name="tooltype" id="tooltype">
-            @for( y <- ttypes) {
-            <option value="@y.id">@y.name</option>
-            }
-        </select>
-        <input type="submit" value="search">
-    </form>
-    @if(tools.size() != 0) {
-    @for( t <- tools) {
-    @if(t.name.toLowerCase().indexOf(searchString) != -1) {
-    <li><a href="/tools/@t.id">@t.name</a></li>
+                        <div class="hero-unit" style="background-color:white ; opacity:0.85">
+                            @if(flash.containsKey("success")) {
+                                <h3 align="center">Success:
+                                    @flash.get("success")</h3>
+                            }
+                            @if(flash.containsKey("error")) {
+                                <h3 align="center">Error:
+                                    @flash.get("error")</h3>
+                            }
+                            <div class="search-section">
+                                <p>Search by category:</p>
+                                <form action="@routes.Tools.search()" method="get">
+                                    <input type="hidden" value="@searchString.toString" name="searchString" id="searchString"/>
+                                    <label for="tooltype">Categories</label>
+                                    <select name="tooltype" id="tooltype">
+                                        <option value="0">All Categories</option>
+                                        @for( y <- ttypes) {
+                                            <option value="@y.id">@y.name</option>
+                                        }
+                                    </select>
+                                    <input type="submit" value="search">
+                                </form>
+                                @if(tools.size() != 0) {
+                                    @if(searchString.equals("All")) {
+                                        @for( t <- tools) {
+                                            <li><a href="/tools/@t.id">@t.name</a></li>
+                                        }
+                                    } else {
+                                        @for( t <- tools) {
+                                            @if(t.name.toLowerCase().indexOf(searchString) != -1) {
+                                                <li><a href="/tools/@t.id">@t.name</a></li>
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    <p>No tools in database =(</p>
+                                }
+                            </div>
+                        </div>
+
+                    </div><!--/span-->
+                    <!-- OUR CONTENT -->
+                </div><!--/row-->
+            </div>
+                <!-- NAV AND CONTENT CONTAINER -->
+        </div>
     }
-    }
-    }else{
-    <p>No tools in database =(</p>
-    }
-</div>
-</div>
-
-</div><!--/span-->
-<!-- OUR CONTENT -->
-</div><!--/row-->
-</div>
-<!-- NAV AND CONTENT CONTAINER -->
-</div>
-}

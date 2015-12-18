@@ -1,91 +1,91 @@
 @main("Sign Up") {
 
-<div class="full" style="">
-    <!-- NAV AND CONTENT CONTAINER -->
-    <div class="container-fluid">
-        <div class="row-fluid">
+    <div class="full" style="">
+            <!-- NAV AND CONTENT CONTAINER -->
+        <div class="container-fluid">
+            <div class="row-fluid">
 
-            <!-- SIDE BAR NAVIGATION -->
-            <div class="span2" style="opacity:0.9">
-                <div class="well sidebar-nav">
-                    <ul class="nav nav-list">
-                        <li class="nav-header">Site Navigation</li>
-                        <li><a href="@routes.Application.loginform()">Login</a></li>
-                        <li><a href="@routes.Application.signupform()">Sign Up</a></li>
-                        <li><a href="@routes.Tools.index()">Tools</a></li>
-                    </ul>
-                </div><!--/.well -->
-            </div><!--/span-->
+                    <!-- SIDE BAR NAVIGATION -->
+                <div class="span2" style="opacity:0.9">
+                    <div class="well sidebar-nav">
+                        <ul class="nav nav-list">
+                            <li class="nav-header">Site Navigation</li>
+                            <li><a href="@routes.Application.loginform()">Login</a></li>
+                            <li><a href="@routes.Application.signupform()">Sign Up</a></li>
+                            <li><a href="@routes.Tools.index()">Tools</a></li>
+                        </ul>
+                    </div><!--/.well -->
+                </div><!--/span-->
 
-            <!-- SIDE BAR NAVIGATION -->
-            <!-- OUR CONTENT -->
-            <div class="span6">
+                <!-- SIDE BAR NAVIGATION -->
+                <!-- OUR CONTENT -->
+                <div class="span6">
 
-                <div class="hero-unit" style="background-color:white; opacity:0.85">
-                    @if(flash.containsKey("success")) {
-                    <h3>Success:
-                        @flash.get("success")</h3>
-                    }
-                    @if(flash.containsKey("error")) {
-                    <h3>Error:
-                        @flash.get("error")</h3>
-                    }
-<h2 align="center">Sign Up</h2>
-<h2 align="center">
-<form action="@routes.Application.signup()" method="post">
-    <label for="email">Email</label>
-    <input type="email" name="email" id="email">
-    <br>
+                    <div class="hero-unit" style="background-color:white ; opacity:0.85">
+                        @if(flash.containsKey("success")) {
+                            <h3>Success:
+                                @flash.get("success")</h3>
+                        }
+                        @if(flash.containsKey("error")) {
+                            <h3>Error:
+                                @flash.get("error")</h3>
+                        }
+                        <h2 align="center">Sign Up</h2>
+                        <h2 align="center">
+                            <form action="@routes.Application.signup()" method="post">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" id="email">
+                                <br>
 
-    <label for="confirm_email">Confirm Email</label>
-    <input type="email" name="confirm_email" id="confirm_email" onblur="confirmEmail()">
-    <br>
+                                <label for="confirm_email">Confirm Email</label>
+                                <input type="email" name="confirm_email" id="confirm_email" onblur="confirmEmail()">
+                                <br>
 
-    <script type="text/javascript">
-                function confirmEmail() {
-                    var email = document.getElementById("email").value;
-                    var confemail = document.getElementById("confirm_email").value;
-                    if(email != confemail) {
-                        alert('Email Not Matching!');
-                    }
-                }
-        </script>
+                                <script type="text/javascript">
+                                        function confirmEmail() {
+                                            var email = document.getElementById("email").value;
+                                            var confemail = document.getElementById("confirm_email").value;
+                                            if(email != confemail) {
+                                                alert('Email Not Matching!');
+                                            }
+                                        }
+                                </script>
 
-    <label for="username">Username</label>
-    <input type="text" name="username">
-    <br>
+                                <label for="username">Username</label>
+                                <input type="text" name="username">
+                                <br>
 
-    <label for="password">Password</label>
-    <input type="password" name="password">
-    <br>
+                                <label for="password">Password</label>
+                                <input type="password" name="password">
+                                <br>
 
-    <label for="confirm_password">Confirm Password</label>
-    <input type="password" name="confirm_password" id="confirm_password" onblur="confirmPassword()">
-    <br>
+                                <label for="confirm_password">Confirm Password</label>
+                                <input type="password" name="confirm_password" id="confirm_password" onblur="confirmPassword()">
+                                <br>
 
-    <script type="text/javascript">
-                function confirmPassword() {
-                    var password = document.getElementById("password").value;
-                    var confpassword = document.getElementById("confirm_password").value;
-                    if(password != confpassword) {
-                        alert('Passwords Not Matching!');
-                    }
-                }
-        </script>
+                                <script type="text/javascript">
+                                        function confirmPassword() {
+                                            var password = document.getElementById("password").value;
+                                            var confpassword = document.getElementById("confirm_password").value;
+                                            if(password != confpassword) {
+                                                alert('Passwords Not Matching!');
+                                            }
+                                        }
+                                </script>
 
-    <button>Sign Up</button>
-</form>
-</h2>
-<h3 align="center"> Or if you already have an account please
-<a href="@routes.Application.loginform()">Login</a>
-    </h3>
-                </div>
+                                <button>Sign Up</button>
+                            </form>
+                        </h2>
+                        <h3 align="center"> Or if you already have an account please
+                            <a href="@routes.Application.loginform()">Login</a>
+                        </h3>
+                    </div>
 
-            </div><!--/span-->
-            <!-- OUR CONTENT -->
-        </div><!--/row-->
+                </div><!--/span-->
+                <!-- OUR CONTENT -->
+            </div><!--/row-->
+        </div>
+            <!-- NAV AND CONTENT CONTAINER -->
     </div>
-    <!-- NAV AND CONTENT CONTAINER -->
-</div>
 
 }

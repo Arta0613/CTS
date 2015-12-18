@@ -20,7 +20,7 @@ public class Application extends Controller {
             User user = User.find.byId(Long.parseLong(session().get("user_id")));
             if (session().containsKey("user_id") && session().get("user_id").equals(user.id.toString()))
                 return ok(views.html.uindex.render(user, tools, toolTypes));
-            }
+        }
         return ok(index.render(tools, toolTypes));
     }
 
@@ -35,7 +35,7 @@ public class Application extends Controller {
 
         User user = User.find.where().eq("username", username).findUnique();
 
-        if(user != null && user.authenticate(password)) {
+        if (user != null && user.authenticate(password)) {
             flash("success", "Welcome " + user.username);
             session("user_id", user.id.toString());
             return redirect(routes.UserPage.index(user.id));
@@ -62,9 +62,19 @@ public class Application extends Controller {
             return redirect(routes.Application.signupform());
         }
 
-        User user = User.createNewUser(username, password, email);
+        User user = User.find.where().eq("username", username).findUnique();
+        if (user != null) {
+            flash("error", username + " exists");
+            return ok(views.html.loginfrom.render());
+        } else if (User.find.where().eq("email", email).findUnique() != null) {
+            ;
+            flash("error", email + " exists");
+            return ok(views.html.loginfrom.render());
+        }
 
-        if(user == null) {
+        user = User.createNewUser(username, password, email);
+
+        if (user == null) {
             flash("error", "Please check your input and try again");
             return redirect(routes.Application.signupform());
         }

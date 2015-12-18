@@ -1,4 +1,5 @@
-@(user: model.User, ttypes: List[model.ToolType])
+@import java.util
+@(user: model.User, ttypes: util.List[model.ToolType])
 
 <!-- NAVIGATION BAR ON TOP -->
 <div class="navbar navbar-inverse navbar-fixed-top">
@@ -18,22 +19,25 @@
                     <li><a href="/user/borrowedtools">My Borrowed Tools</a></li>
                     <li><a href="/user/comments">My Comments</a></li>
                 </ul>
-                <form id="tfnewsearch" method="get" action=@routes.Tools.search() class="navbar-text pull-right">
-                    <div id="tfheader">
-                        <select name="tooltype" id="tooltype">
-                            <option value="0">All Categories</option>
-                        </select>
-                        <input type="text" class="tftextinput" name="search" size="20" maxlength="120">
-                        <input type="submit" value="search" class="tfbutton">
-                        <input type="hidden" name="previousURL" value="@request.uri()"/>
-                        <div class="tfclear"></div>
-                    </div>
+                <form id="tfnewsearch" method="get" action="@routes.Tools.search()" class="navbar-text pull-right">
+                <div id="tfheader">
+                    <select name="tooltype" id="tooltype">
+                        <option value="0">All Categories</option>
+                        @for( y <- ttypes) {
+                            <option value="@y.id">@y.name</option>
+                        }
+                    </select>
+                    <input type="text" class="tftextinput" name="search" size="20" maxlength="120">
+                    <input type="submit" value="search" class="tfbutton">
+                    <input type="hidden" name="previousURL" value="@request.uri()"/>
+                    <div class="tfclear"></div>
+                </div>
                 </form>
                 <p class="navbar-text">
                     Logged in as <a href="/user?id=@user.id" class="navbar-link">@user.username</a>
                 </p>
-            </div><!--/.nav-collapse -->
+            </div> <!--/.nav-collapse -->
         </div>
     </div>
 </div>
-<!-- NAVIGATION BAR ON TOP -->
+    <!-- NAVIGATION BAR ON TOP -->

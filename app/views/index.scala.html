@@ -1,183 +1,185 @@
 @(tools: List[model.Tool], ttypes: List[model.ToolType])
 
-@main("Tool CT") {
-@header(ttypes)
+    @main("Tool CT") {
+        @header(ttypes)
 
-<div class="full" style="">
-<!-- NAV AND CONTENT CONTAINER -->
-<div class="container-fluid">
-    <div class="row-fluid">
+        <div class="full" style="">
+                <!-- NAV AND CONTENT CONTAINER -->
+            <div class="container-fluid">
+                <div class="row-fluid">
 
-        <!-- SIDE BAR NAVIGATION -->
-        <div class="span2" style="opacity:0.9">
-            <div class="well sidebar-nav">
-                <ul class="nav nav-list">
-                    <li class="nav-header">Site Navigation</li>
-                    <li><a href="@routes.Application.loginform()">Login</a></li>
-                    <li><a href="@routes.Application.signupform()">Sign Up</a></li>
-                    <li><a href="@routes.Tools.index()">Tools</a></li>
-                </ul>
-            </div><!--/.well -->
-        </div><!--/span-->
+                        <!-- SIDE BAR NAVIGATION -->
+                    <div class="span2" style="opacity:0.9">
+                        <div class="well sidebar-nav">
+                            <ul class="nav nav-list">
+                                <li class="nav-header">Site Navigation</li>
+                                <li><a href="@routes.Application.loginform()">Login</a></li>
+                                <li><a href="@routes.Application.signupform()">Sign Up</a></li>
+                                <li><a href="@routes.Tools.index()">Tools</a></li>
+                            </ul>
+                        </div><!--/.well -->
+                    </div><!--/span-->
 
-        <!-- SIDE BAR NAVIGATION -->
-        <!-- OUR CONTENT -->
-        <div class="span6">
+                    <!-- SIDE BAR NAVIGATION -->
+                    <!-- OUR CONTENT -->
+                    <div class="span6">
 
-            <div class="hero-unit" style="background-color:white; opacity:0.85">
-                @if(flash.containsKey("success")) {
-                <h3>Success:
-                    @flash.get("success")</h3>
-                }
-                @if(flash.containsKey("error")) {
-                <h3>Error:
-                    @flash.get("error")</h3>
-                }
-                <h1 align="center">Welcome to Tool CiTy</h1>
+                        <div class="hero-unit" style="background-color:white ; opacity:0.85">
+                            @if(flash.containsKey("success")) {
+                                <h3>Success:
+                                    @flash.get("success")</h3>
+                            }
+                            @if(flash.containsKey("error")) {
+                                <h3>Error:
+                                    @flash.get("error")</h3>
+                            }
+                            <h1 align="center">Welcome to Tool CiTy</h1>
 
-                <h2 align="center">A Sharing Service for all Tools</h2>
+                            <h2 align="center">A Sharing Service for all Tools</h2>
 
-                <!-- Carousel -->
+                                <!-- Carousel -->
 
-                    <div id="main_area">
-                        <!-- Slider -->
-                        <div class="row">
-                            <div class="span12" id="slider">
-                                <!-- Top part of the slider -->
+                            <div id="main_area">
+                                    <!-- Slider -->
                                 <div class="row">
-                                    <div class="span8" id="carousel-bounding-box">
-                                        <div class="carousel slide" id="myCarousel">
-                                            <!-- Carousel items -->
-                                            <div class="carousel-inner">
-                                                <div class="active item" data-slide-number="0">
-                                                    <img src="http://placehold.it/770x300&text=one"></div>
+                                    <div class="span12" id="slider">
+                                            <!-- Top part of the slider -->
+                                        <div class="row">
+                                            <div class="span8" id="carousel-bounding-box">
+                                                <div class="carousel slide" id="myCarousel">
+                                                        <!-- Carousel items -->
+                                                    <div class="carousel-inner">
+                                                        <div class="active item" data-slide-number="0">
+                                                            <img src="http://pediaa.com/wp-content/uploads/2014/11/What-is-the-Difference-Between-Tools-and-Equipment.jpg"></div>
 
-                                                <div class="item" data-slide-number="1">
-                                                    <img src="http://placehold.it/770x300&text=two"></div>
+                                                        <div class="item" data-slide-number="1">
+                                                            <img src="http://placehold.it/770x300&text=two"></div>
 
-                                                <div class="item" data-slide-number="2">
-                                                    <img src="http://placehold.it/770x300&text=three"></div>
+                                                        <div class="item" data-slide-number="2">
+                                                            <img src="http://placehold.it/770x300&text=three"></div>
 
-                                                <div class="item" data-slide-number="3">
-                                                    <img src="http://placehold.it/770x300&text=four"></div>
+                                                        <div class="item" data-slide-number="3">
+                                                            <img src="http://placehold.it/770x300&text=four"></div>
 
-                                                <div class="item" data-slide-number="4">
-                                                    <img src="http://placehold.it/770x300&text=five"></div>
+                                                        <div class="item" data-slide-number="4">
+                                                            <img src="http://placehold.it/770x300&text=five"></div>
 
-                                                <div class="item" data-slide-number="5">
-                                                    <img src="http://placehold.it/770x300&text=six"></div>
-                                            </div><!-- Carousel nav -->
-                                            <a class="carousel-control left" data-slide="prev" href="#myCarousel">‹</a>
-                                            <a class="carousel-control right" data-slide="next" href="#myCarousel">›</a>
+                                                        <div class="item" data-slide-number="5">
+                                                            <img src="http://placehold.it/770x300&text=six"></div>
+                                                    </div><!-- Carousel nav -->
+                                                    <a class="carousel-control left" data-slide="prev" href="#myCarousel">
+                                                        ‹</a>
+                                                    <a class="carousel-control right" data-slide="next" href="#myCarousel">
+                                                        ›</a>
+                                                </div>
+                                            </div>
+
+                                            <div class="span4" id="carousel-text"></div>
+
+                                            <div id="slide-content" style="display: none ;">
+                                                <div id="slide-content-0">
+                                                    <h2>Slider One</h2>
+                                                    <p>Equipment/Tool Difference</p>
+                                                    <p class="sub-text">October 24 2012 - <a href="#">Read more</a></p>
+                                                </div>
+
+                                                <div id="slide-content-1">
+                                                    <h2>Slider Two</h2>
+                                                    <p>Lorem Ipsum Dolor</p>
+                                                    <p class="sub-text">October 24 2012 - <a href="#">Read more</a></p>
+                                                </div>
+
+                                                <div id="slide-content-2">
+                                                    <h2>Slider Three</h2>
+                                                    <p>Lorem Ipsum Dolor</p>
+                                                    <p class="sub-text">October 24 2012 - <a href="#">Read more</a></p>
+                                                </div>
+
+                                                <div id="slide-content-3">
+                                                    <h2>Slider Four</h2>
+                                                    <p>Lorem Ipsum Dolor</p>
+                                                    <p class="sub-text">October 24 2012 - <a href="#">Read more</a></p>
+                                                </div>
+
+                                                <div id="slide-content-4">
+                                                    <h2>Slider Five</h2>
+                                                    <p>Lorem Ipsum Dolor</p>
+                                                    <p class="sub-text">October 24 2012 - <a href="#">Read more</a></p>
+                                                </div>
+
+                                                <div id="slide-content-5">
+                                                    <h2>Slider Six</h2>
+                                                    <p>Lorem Ipsum Dolor</p>
+                                                    <p class="sub-text">October 24 2012 - <a href="#">Read more</a></p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
+                                </div><!--/Slider-->
 
-                                    <div class="span4" id="carousel-text"></div>
+                                <div class="row hidden-phone" id="slider-thumbs">
+                                    <div class="span12">
+                                            <!-- Bottom switcher of slider -->
 
-                                    <div id="slide-content" style="display: none;">
-                                        <div id="slide-content-0">
-                                            <h2>Slider One</h2>
-                                            <p>Lorem Ipsum Dolor</p>
-                                            <p class="sub-text">October 24 2012 - <a href="#">Read more</a></p>
-                                        </div>
+                                        <ul class="thumbnails">
+                                            <li class="span2">
+                                                <a class="thumbnail" id="carousel-selector-0"><img src="http://placehold.it/170x100&text=one"></a>
+                                            </li>
 
-                                        <div id="slide-content-1">
-                                            <h2>Slider Two</h2>
-                                            <p>Lorem Ipsum Dolor</p>
-                                            <p class="sub-text">October 24 2012 - <a href="#">Read more</a></p>
-                                        </div>
+                                            <li class="span2">
+                                                <a class="thumbnail" id="carousel-selector-1"><img src="http://placehold.it/170x100&text=two"></a>
+                                            </li>
 
-                                        <div id="slide-content-2">
-                                            <h2>Slider Three</h2>
-                                            <p>Lorem Ipsum Dolor</p>
-                                            <p class="sub-text">October 24 2012 - <a href="#">Read more</a></p>
-                                        </div>
+                                            <li class="span2">
+                                                <a class="thumbnail" id="carousel-selector-2"><img src="http://placehold.it/170x100&text=three"></a>
+                                            </li>
 
-                                        <div id="slide-content-3">
-                                            <h2>Slider Four</h2>
-                                            <p>Lorem Ipsum Dolor</p>
-                                            <p class="sub-text">October 24 2012 - <a href="#">Read more</a></p>
-                                        </div>
+                                            <li class="span2">
+                                                <a class="thumbnail" id="carousel-selector-3"><img src="http://placehold.it/170x100&text=four"></a>
+                                            </li>
 
-                                        <div id="slide-content-4">
-                                            <h2>Slider Five</h2>
-                                            <p>Lorem Ipsum Dolor</p>
-                                            <p class="sub-text">October 24 2012 - <a href="#">Read more</a></p>
-                                        </div>
+                                            <li class="span2">
+                                                <a class="thumbnail" id="carousel-selector-4"><img src="http://placehold.it/170x100&text=five"></a>
+                                            </li>
 
-                                        <div id="slide-content-5">
-                                            <h2>Slider Six</h2>
-                                            <p>Lorem Ipsum Dolor</p>
-                                            <p class="sub-text">October 24 2012 - <a href="#">Read more</a></p>
-                                        </div>
+                                            <li class="span2">
+                                                <a class="thumbnail" id="carousel-selector-5"><img src="http://placehold.it/170x100&text=six"></a>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
-                        </div><!--/Slider-->
+                            <script type="text/javascript"> jQuery(document).ready(function($) {
 
-                        <div class="row hidden-phone" id="slider-thumbs">
-                            <div class="span12">
-                                <!-- Bottom switcher of slider -->
+                                $('#myCarousel').carousel({
+                                    interval: 5000
+                                });
 
-                                <ul class="thumbnails">
-                                    <li class="span2">
-                                        <a class="thumbnail" id="carousel-selector-0"><img src="http://placehold.it/170x100&text=one"></a>
-                                    </li>
+                                $('#carousel-text').html($('#slide-content-0').html());
 
-                                    <li class="span2">
-                                        <a class="thumbnail" id="carousel-selector-1"><img src="http://placehold.it/170x100&text=two"></a>
-                                    </li>
+                                //Handles the carousel thumbnails
+                                $('[id^=carousel-selector-]').click( function(){
+                                    var id_selector = $(this).attr("id");
+                                    var id = id_selector.substr(id_selector.length -1);
+                                    var id = parseInt(id);
+                                    $('#myCarousel').carousel(id);
+                                });
 
-                                    <li class="span2">
-                                        <a class="thumbnail" id="carousel-selector-2"><img src="http://placehold.it/170x100&text=three"></a>
-                                    </li>
 
-                                    <li class="span2">
-                                        <a class="thumbnail" id="carousel-selector-3"><img src="http://placehold.it/170x100&text=four"></a>
-                                    </li>
+                                // When the carousel slides, auto update the text
+                                $('#myCarousel').on('slid', function (e) {
+                                    var id = $('.item.active').data('slide-number');
+                                    $('#carousel-text').html($('#slide-content-'+id).html());
+                                });
+                            });</script>
+                                <!-- Carousel -->
 
-                                    <li class="span2">
-                                        <a class="thumbnail" id="carousel-selector-4"><img src="http://placehold.it/170x100&text=five"></a>
-                                    </li>
-
-                                    <li class="span2">
-                                        <a class="thumbnail" id="carousel-selector-5"><img src="http://placehold.it/170x100&text=six"></a>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
-                    </div>
-                <script type="text/javascript"> jQuery(document).ready(function($) {
 
-        $('#myCarousel').carousel({
-                interval: 5000
-        });
-
-        $('#carousel-text').html($('#slide-content-0').html());
-
-        //Handles the carousel thumbnails
-        $('[id^=carousel-selector-]').click( function(){
-                var id_selector = $(this).attr("id");
-                var id = id_selector.substr(id_selector.length -1);
-                var id = parseInt(id);
-                $('#myCarousel').carousel(id);
-        });
-
-
-        // When the carousel slides, auto update the text
-        $('#myCarousel').on('slid', function (e) {
-                var id = $('.item.active').data('slide-number');
-                $('#carousel-text').html($('#slide-content-'+id).html());
-        });
-                });</script>
-                <!-- Carousel -->
-
+                    </div><!--/span-->
+                    <!-- OUR CONTENT -->
+                </div><!--/row-->
             </div>
-
-        </div><!--/span-->
-        <!-- OUR CONTENT -->
-    </div><!--/row-->
-</div>
-<!-- NAV AND CONTENT CONTAINER -->
-</div>
-}
+                <!-- NAV AND CONTENT CONTAINER -->
+        </div>
+    }

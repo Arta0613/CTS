@@ -87,46 +87,54 @@ public class Tools extends Controller {
     }
 
     ToolType tooltype = null;
-
     public Result search() {
         DynamicForm searchForm = Form.form().bindFromRequest();
-        String searchString = searchForm.get("search");
-
         List<ToolType> tooltypes = ToolType.find.all();
         String tooltype_id = searchForm.data().get("tooltype");
-
-        // Buggy
-        if (!tooltype_id.equals("0")) {
-            tooltype = ToolType.find.byId(Long.parseLong(tooltype_id));
-        }
         List<Tool> toolsAll = Tool.find.all();
         List<Tool> tools = new ArrayList<>();
-        if (!toolsAll.isEmpty() && tooltype != null) {
-            tools.addAll(toolsAll.stream().filter(t -> t.toolType.name.equals(tooltype.name)).collect(Collectors.toList()));
-        } else {
-            tools = toolsAll;
-        }
-        if (searchString == null && searchForm.get("searchString") != null) {
-            searchString = searchForm.get("searchString");
-        }
-        if (!searchString.isEmpty()) {
-            if (session().containsKey("user_id")) {
-                User user = User.find.byId(Long.parseLong(session().get("user_id")));
-                if (session().containsKey("user_id") && session().get("user_id").equals(user.id.toString()))
-                    flash("success", searchString);
-                return ok(views.html.search.ushow.render(searchString, tools, tooltypes, user));
+        // Header Search
+        String searchString = searchForm.get("search");
+        tooltype = null;
+        if (searchString != null) {
+            if (!tooltype_id.equals("0")) {
+                tooltype = ToolType.find.byId(Long.parseLong(tooltype_id));
             }
+            if (searchString.isEmpty())
+                searchString = "All";
+            if (!toolsAll.isEmpty() && tooltype != null) {
+                tools.addAll(toolsAll.stream().filter(t -> t.toolType.name.equals(tooltype.name)).collect(Collectors.toList()));
+            } else {
+                tools = toolsAll;
+            }
+            renderShow(searchString, tools, tooltypes);
             flash("success", searchString);
             return ok(views.html.search.show.render(searchString, tools, tooltypes));
         } else {
-            flash("error", "oh man =( you didn't search for anything");
-            //TODO: fill rest of cases
-            String previousURL = searchForm.get("previousURL");
-            if (previousURL.startsWith("/user")) {
-                return redirect(routes.UserPage.index(Integer.parseInt(session().get("user_id"))));
-            } else
-                return redirect(routes.Application.index());
+            searchString = searchForm.get("searchString");
+            if (!tooltype_id.equals("0")) {
+                tooltype = ToolType.find.byId(Long.parseLong(tooltype_id));
+            }
+            if (!toolsAll.isEmpty() && tooltype != null) {
+                tools.addAll(toolsAll.stream().filter(t -> t.toolType.name.equals(tooltype.name)).collect(Collectors.toList()));
+            } else {
+                tools = toolsAll;
+            }
+            renderShow(searchString, tools, tooltypes);
+            flash("success", searchString);
+            return ok(views.html.search.show.render(searchString, tools, tooltypes));
         }
+    }
+
+    private Result renderShow(String searchString, List<Tool> tools, List<ToolType> tooltypes) {
+        if (session().containsKey("user_id")) {
+            User user = User.find.byId(Long.parseLong(session().get("user_id")));
+            if (session().containsKey("user_id") && session().get("user_id").equals(user.id.toString()))
+                flash("success", searchString);
+            return ok(views.html.search.ushow.render(searchString, tools, tooltypes, user));
+        }
+        flash("success", searchString);
+        return ok(views.html.search.show.render(searchString, tools, tooltypes));
     }
 }
 

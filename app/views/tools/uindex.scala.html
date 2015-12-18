@@ -1,85 +1,85 @@
 @(user: model.User, tools: List[model.Tool], ttypes: List[model.ToolType], transactions: List[model.Transaction])
 
-@users.main("Tools") {
+    @users.main("Tools") {
 
-@uheader(user, ttypes)
+        @uheader(user, ttypes)
 
-<div class="full" style="">
-    <!-- NAV AND CONTENT CONTAINER -->
-    <div class="container-fluid">
-        <div class="row-fluid">
+        <div class="full" style="">
+                <!-- NAV AND CONTENT CONTAINER -->
+            <div class="container-fluid">
+                <div class="row-fluid">
 
-            <!-- SIDE BAR NAVIGATION -->
-            <div class="span2" style="opacity:0.9">
-                <div class="well sidebar-nav">
-                    <ul class="nav nav-list">
-                        <li class="nav-header">Site Navigation</li>
-                        <li><a href="@routes.Application.logout()">Log Out</a></li>
-                        <li><a href="@routes.Tools.index()">Borrow Tools</a></li>
-                        <li><a href="@routes.ToolTypes.index()">Add Tool Category</a></li>
-                    </ul>
-                </div><!--/.well -->
-            </div><!--/span-->
-            <!-- SIDE BAR NAVIGATION -->
+                        <!-- SIDE BAR NAVIGATION -->
+                    <div class="span2" style="opacity:0.9">
+                        <div class="well sidebar-nav">
+                            <ul class="nav nav-list">
+                                <li class="nav-header">Site Navigation</li>
+                                <li><a href="@routes.Application.logout()">Log Out</a></li>
+                                <li><a href="@routes.Tools.index()">Borrow Tools</a></li>
+                                <li><a href="@routes.ToolTypes.index()">Add Tool Category</a></li>
+                            </ul>
+                        </div><!--/.well -->
+                    </div><!--/span-->
+                    <!-- SIDE BAR NAVIGATION -->
 
-            <!-- OUR CONTENT -->
-            <div class="span6">
+                    <!-- OUR CONTENT -->
+                    <div class="span6">
 
-                <div class="hero-unit" style="background-color:white; opacity:0.85">
-                    @if(flash.containsKey("success")) {
-                    <h3 align="center">Success:
-                        @flash.get("success")</h3>
-                    }
-                    @if(flash.containsKey("error")) {
-                    <h3 align="center">Error:
-                        @flash.get("error")</h3>
-                    }
-                    @if(tools.isEmpty()) {
-                    <h2 align="center">No Tools available</h2>
-                    } else {
-                    <h2 align="center">Tool List</h2>
-                    <ul>
-                        @for(t <- tools) {
-                        @if(t.transactionList.isEmpty) {
-                        <form action=@routes.UserPage.addTrans() method="post">
-                            <input type="hidden" value="@t.id" name="tool_id"/>
+                        <div class="hero-unit" style="background-color:white ; opacity:0.85">
+                            @if(flash.containsKey("success")) {
+                                <h3 align="center">Success:
+                                    @flash.get("success")</h3>
+                            }
+                            @if(flash.containsKey("error")) {
+                                <h3 align="center">Error:
+                                    @flash.get("error")</h3>
+                            }
+                            @if(tools.isEmpty()) {
+                                <h2 align="center">No Tools available</h2>
+                            } else {
+                                <h2 align="center">Tool List</h2>
+                                <ul>
+                                @for( t <- tools) {
+                                    @if(t.transactionList.isEmpty) {
+                                        <form action=@routes.UserPage.addTrans() method="post">
+                                            <input type="hidden" value="@t.id" name="tool_id"/>
 
-                            <li><h3><a href="/tools/@t.id">@t.name</a></h3>
-                                <button>Borrow Me</button>
-                                <br>Type: @t.toolType.name
-                                <br>Owner: @t.owner.username
-                            </li>
-                        </form>
-                        } else {
-                        @if(transactions.get(transactions.size() - 1).Available) {
-                        <form action=@routes.UserPage.addTrans() method="post">
-                            <input type="hidden" value="@t.id" name="tool_id"/>
+                                            <li><h3><a href="/tools/@t.id">@t.name</a></h3>
+                                                <button>Borrow Me</button>
+                                                <br>Type: @t.toolType.name
+                                                <br>Owner: @t.owner.username
+                                            </li>
+                                        </form>
+                                    } else {
+                                        @if(transactions.get(transactions.size() - 1).Available) {
+                                            <form action=@routes.UserPage.addTrans() method="post">
+                                                <input type="hidden" value="@t.id" name="tool_id"/>
 
-                            <li><h3><a href="/tools/@t.id">@t.name</a></h3>
-                                <button>Borrow Me</button>
-                                <br>Type: @t.toolType.name
-                                <br>Owner: @t.owner.username
-                            </li>
-                        </form>
-                        } else {
-                        <li><h3><a href="/tools/@t.id">@t.name</a></h3>
-                            <h4> Not Available </h4>
-                            Type: @t.toolType.name
-                            <br>Owner: @t.owner.username
-                        </li>
+                                                <li><h3><a href="/tools/@t.id">@t.name</a></h3>
+                                                    <button>Borrow Me</button>
+                                                    <br>Type: @t.toolType.name
+                                                    <br>Owner: @t.owner.username
+                                                </li>
+                                            </form>
+                                        } else {
+                                            <li><h3><a href="/tools/@t.id">@t.name</a></h3>
+                                                <h4> Not Available </h4>
+                                                Type: @t.toolType.name
+                                                <br>Owner: @t.owner.username
+                                            </li>
 
-                        }
-                        }
+                                        }
+                                    }
 
-                        }
-                    </ul>
-                    }
-                </div>
+                                }
+                                </ul>
+                            }
+                        </div>
 
-            </div><!--/span-->
-            <!-- OUR CONTENT -->
-        </div><!--/row-->
-    </div>
-    <!-- NAV AND CONTENT CONTAINER -->
-</div>
-}
+                    </div><!--/span-->
+                    <!-- OUR CONTENT -->
+                </div><!--/row-->
+            </div>
+                <!-- NAV AND CONTENT CONTAINER -->
+        </div>
+    }
