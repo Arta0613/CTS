@@ -4,7 +4,6 @@
 
 # Home page
 GET     /                                 controllers.Application.index()
-GET     /signup                           controllers.Application.gsignup()
 POST    /login                            controllers.Application.login()
 GET     /login/new                        controllers.Application.loginform()
 GET     /signup/new                       controllers.Application.signupform()
@@ -29,7 +28,7 @@ GET     /tools                      controllers.Tools.index()
 GET     /tools/new                  controllers.Tools.toolform()
 GET     /tools/search               controllers.Tools.search()
 GET     /tools/:id                  controllers.Tools.show(id:Long)
-#DELETE  /tools/:id                  controllers.Tools.delete(id: Long)
+POST    /tools/                  controllers.Tools.delete()
 #GET     /tools/:id/edit             controllers.Tools.edit(id: Long)
 #PUT     /tools/:id                  controllers.Tools.update(id: Long)
 POST    /tools                       controllers.Tools.create()

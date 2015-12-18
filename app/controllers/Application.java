@@ -24,10 +24,6 @@ public class Application extends Controller {
         return ok(index.render(tools, toolTypes));
     }
 
-    public Result gsignup() {
-        return ok(views.html.users.form.render());
-    }
-
     public Result login() {
         DynamicForm userForm = Form.form().bindFromRequest();
         String username = userForm.data().get("username");

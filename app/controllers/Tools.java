@@ -46,6 +46,8 @@ public class Tools extends Controller {
         Tool tool = toolForm.get();
         tool.toolType = tooltype;
         tool.owner = User.find.byId(Long.parseLong(session().get("user_id")));
+        String imgURL = toolForm.data().get("imgURL");
+        tool.imgUrl = imgURL;
         tool.save();
         flash("success", "Saved new Tool: " + tool.name);
         return redirect(routes.UserPage.mytools());
@@ -101,7 +103,7 @@ public class Tools extends Controller {
                 tooltype = ToolType.find.byId(Long.parseLong(tooltype_id));
             }
             if (searchString.isEmpty())
-                searchString = "All";
+                searchString = "All Tools";
             if (!toolsAll.isEmpty() && tooltype != null) {
                 tools.addAll(toolsAll.stream().filter(t -> t.toolType.name.equals(tooltype.name)).collect(Collectors.toList()));
             } else {
@@ -124,6 +126,12 @@ public class Tools extends Controller {
             flash("success", searchString);
             return ok(views.html.search.show.render(searchString, tools, tooltypes));
         }
+    }
+
+    public Result delete() {
+        DynamicForm form = Form.form().bindFromRequest();
+        Tool.find.ref(Long.parseLong(form.data().get("id"))).delete();
+        return redirect(routes.UserPage.mytools());
     }
 
     private Result renderShow(String searchString, List<Tool> tools, List<ToolType> tooltypes) {

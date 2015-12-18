@@ -49,7 +49,7 @@
                                     <input type="submit" value="search">
                                 </form>
                                 @if(tools.size() != 0) {
-                                    @if(searchString.equals("All")) {
+                                    @if(searchString.equals("All Tools")) {
                                         @for( t <- tools) {
                                             <li><a href="/tools/@t.id">@t.name</a></li>
                                         }

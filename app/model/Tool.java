@@ -32,7 +32,7 @@ public class Tool extends Model {
     @ManyToOne
     public ToolType toolType;
 
-    @OneToMany(mappedBy = "tool")
+    @OneToMany(mappedBy = "tool", cascade=CascadeType.ALL)
     public List<Comment> commentList;
 
     @OneToMany(mappedBy = "to_borrow")
