@@ -14,8 +14,8 @@
                         <ul class="nav nav-list">
                             <li class="nav-header">Site Navigation</li>
                             <li><a href="@routes.Application.logout()">Log Out</a></li>
-                            <li><a href="@routes.Tools.index()">Borrow Tools</a></li>
-                            <li><a href="@routes.ToolTypes.index()">Add Tool Category</a></li>
+                            <li><a href="@routes.Tools.index()">All Tools</a></li>
+                            <li><a href="@routes.Tools.toolform()">Add Tool</a></li>
                         </ul>
                     </div><!--/.well -->
                 </div><!--/span-->
@@ -31,18 +31,30 @@
                             <h3 align="center">Error:
                                 @flash.get("error")</h3>
                         }
+
                         <h2 align="center">@searchedUser.username's Tools: </h2>
 
                         @if(searchedUser.toolsList.isEmpty) {
                             <h2 align="center">No Tools Posted</h2>
                         } else {
                             @for( t <- searchedUser.toolsList) {
+                        <table>
+                            <tr>
+                                <td>
+                                    <a href="/tools/@t.id"><img src="@t.image" class="img-thumbnail" width="150" height="150"></a>
+                                </td>
 
-                                <li><h2><a href="/tools/@t.id">@t.name</a></h2>
-                                    <img src="@t.image">
+                                <td style="padding:20px">
+                                    <h2><a href="/tools/@t.id">@t.name</a></h2>
                                     Type: @t.toolType.name
-                                    <br>
-                                </li>
+                                </td>
+                            </tr>
+                        </table>
+                                <!--<li><h2><a href="/tools/@t.id">@t.name</a></h2>-->
+                                    <!--<img src="@t.image">-->
+                                    <!--Type: @t.toolType.name-->
+                                    <!--<br>-->
+                                <!--</li>-->
                             }
                         }
                     </div>

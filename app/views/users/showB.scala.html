@@ -14,8 +14,9 @@
                             <ul class="nav nav-list">
                                 <li class="nav-header">Site Navigation</li>
                                 <li><a href="@routes.Application.logout()">Log Out</a></li>
-                                <li><a href="@routes.Tools.index()">Borrow Tools</a></li>
-                                <li><a href="@routes.ToolTypes.index()">Add Tool Category</a></li>
+                                <li><a href="@routes.Tools.index()">All Tools</a></li>
+                                <li><a href="@routes.Tools.toolform()">Add Tool</a></li>
+
                             </ul>
                         </div><!--/.well -->
                     </div><!--/span-->
@@ -39,24 +40,32 @@
                                 <h2 align="center">No Tools Borrowed</h2>
                                 <h2 align="center"><a href="@routes.Tools.index()">Borrow Tools</a></h2>
                             } else {
-
-                                <ul>
                                 @for( tr <- trans) {
                                     @for( tl <- tools) {
                                         @if(tr != null && tr.to_borrow.id == tl.id && tr.renter.id == user.id) {
+                                            <table>
+                                                <tr>
+                                                    <td style="padding:10px">
+                                                        <a href="/tools/@tl.id"><img src="@tl.image" class="img-thumbnail" width="150" height="150"></a>
+                                                    </td>
 
-                                            <li><form action=@routes.UserPage.returnTool() method="post">
-                                                <a href="/tools/@tl.id">@tl.name</a>
-                                                Borrowed from: @tr.to_borrow.owner.username
-
-                                                <button>Return Tool</button>
-                                                <input type="hidden" value="@tl.id" name="tool_id"/>
-                                            </form></li>
+                                                    <td style="padding:20px">
+                                                        <h2><a href="/tools/@tl.id">@tl.name</a></h2>
+                                                        Borrowed from: @tr.to_borrow.owner.username
+                                                        <br> @tl.description
+                                                    </td>
+                                                    <td>
+                                                        <form action=@routes.UserPage.returnTool() method="post">
+                                                            <button>Return Tool</button>
+                                                            <input type="hidden" value="@tl.id" name="tool_id"/>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         }
                                     }
                                 }
 
-                                </ul>
                             }
                         </div>
 

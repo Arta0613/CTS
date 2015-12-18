@@ -49,6 +49,7 @@ public class Application extends Controller {
         String confirm_password = userForm.data().get("confirm_password");
         String email = userForm.data().get("email");
         String confirm_email = userForm.data().get("confirm_email");
+        List<model.ToolType> toolTypes = ToolType.find.all();
 
         if (!email.equals(confirm_email)) {
             flash("error", "emails do no match\n" + email + " - " + confirm_email);
@@ -61,11 +62,11 @@ public class Application extends Controller {
         User user = User.find.where().eq("username", username).findUnique();
         if (user != null) {
             flash("error", username + " exists");
-            return ok(views.html.loginfrom.render());
+            return ok(views.html.loginfrom.render(toolTypes));
         } else if (User.find.where().eq("email", email).findUnique() != null) {
             ;
             flash("error", email + " exists");
-            return ok(views.html.loginfrom.render());
+            return ok(views.html.loginfrom.render(toolTypes));
         }
 
         user = User.createNewUser(username, password, email);
@@ -89,10 +90,12 @@ public class Application extends Controller {
     }
 
     public Result loginform() {
-        return ok(views.html.loginfrom.render());
+        List<model.ToolType> toolTypes = ToolType.find.all();
+        return ok(views.html.loginfrom.render(toolTypes));
     }
 
     public Result signupform() {
-        return ok(views.html.users.form.render());
+        List<model.ToolType> toolTypes = ToolType.find.all();
+        return ok(views.html.users.form.render(toolTypes));
     }
 }

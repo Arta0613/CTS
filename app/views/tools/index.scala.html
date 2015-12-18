@@ -2,6 +2,7 @@
 
     @main("Tools") {
 
+        @header(ttypes)
         <div class="full" style="">
                 <!-- NAV AND CONTENT CONTAINER -->
             <div class="container-fluid">
@@ -26,25 +27,36 @@
 
                         <div class="hero-unit" style="background-color:white ; opacity:0.85">
                             @if(flash.containsKey("success")) {
-                                <h3>Success:
+                                <h3 align="center">Success:
                                     @flash.get("success")</h3>
                             }
                             @if(flash.containsKey("error")) {
-                                <h3>Error:
+                                <h3 align="center">Error:
                                     @flash.get("error")</h3>
                             }
                             @if(tools.isEmpty()) {
-                                <h2>No Tools available</h2>
+                                <h2 align="center">No Tools available</h2>
                             } else {
-                                <h2>Tool List</h2>
-                                <ul>
+                                <h2 align="center">Tool List</h2>
+
+
                                 @for( t <- tools) {
-                                    <li><h5><a href="/tools/@t.id">@t.name</a></h5>
-                                        Type: @t.toolType.name
-                                        <br>Owner: @t.owner.username
-                                    </li>
+                                    <ul>
+                                        <table>
+                                        <tr>
+                                            <td>
+                                                <a href="/tools/@t.id"><img src="@t.image" class="img-thumbnail" width="150" height="150"></a>
+                                            </td>
+
+                                            <td style="padding:20px">
+                                                <h2><a href="/tools/@t.id">@t.name</a></h2>
+                                                Type: @t.toolType.name
+                                                <br>Owner: @t.owner.username
+                                            </td>
+                                        </tr>
+                                        </table>
+                                    </ul>
                                 }
-                                </ul>
                             }
                         </div>
 

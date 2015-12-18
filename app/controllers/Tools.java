@@ -73,7 +73,7 @@ public class Tools extends Controller {
             if (session().containsKey("user_id") && session().get("user_id").equals(user.id.toString()))
                 return ok(views.html.tools.ushow.render(user, comments, transactions, tool, toolTypes));
         }
-        return ok(views.html.tools.show.render(tool, comments, transactions));
+        return ok(views.html.tools.show.render(tool, comments, transactions, toolTypes));
     }
 
     @Security.Authenticated(UserAuth.class)

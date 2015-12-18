@@ -15,8 +15,8 @@
                             <ul class="nav nav-list">
                                 <li class="nav-header">Site Navigation</li>
                                 <li><a href="@routes.Application.logout()">Log Out</a></li>
-                                <li><a href="@routes.Tools.index()">Borrow Tools</a></li>
-                                <li><a href="@routes.ToolTypes.index()">Add Tool Category</a></li>
+                                <li><a href="@routes.Tools.index()">All Tools</a></li>
+                                <li><a href="@routes.Tools.toolform()">Add Tool</a></li>
                             </ul>
                         </div><!--/.well -->
                     </div><!--/span-->
@@ -36,9 +36,10 @@
                             }
                             <table>
                                 <tr>
-                                    <td>
-                                        <img src="@tool.image">
-
+                                    <td style="padding:20px">
+                                        <img src="@tool.image" style="height:250px; width:250px">
+                                    </td>
+                                    <td >
                                         <h2>Tool: @tool.name</h2>
 
                                         <p>Type: @tool.toolType.name</p>
@@ -48,44 +49,51 @@
                                         <p>Description: <br>@tool.description</p>
 
                                         @if(tool.transactionList.isEmpty) {
-                                            <p>Availability: Available</p>
+                                        <p>Availability: Available</p>
                                         } else {
-                                            @if(transactions.get(transactions.size() - 1).Available) {
-                                                <p>Availability: Available</p>
-                                            } else {
-                                                <p>Availability: Borrowed</p>
-                                                <p>Borrowed By: @transactions.get(transactions.size() - 1).renter.username</p>
-                                            }
+                                        @if(transactions.get(transactions.size() - 1).Available) {
+                                        <p>Availability: Available</p>
+                                        } else {
+                                        <p>Availability: Borrowed</p>
+                                        <p>Borrowed By: @transactions.get(transactions.size() - 1).renter.username</p>
                                         }
-
-                                        <h3>Comments: </h3>
-                                        @for( c <- comments) {
-                                            <li>
-                                                @c.body
-                                            <br>Posted By: @c.user.username
-                                            </li>
                                         }
                                     </td>
-                                    <td><br>
-                                        <br>
-                                    </td>
-                                    <td>
-                                        <br>
-                                        <br>
-
+                                    <td style="padding:20px">
+                                        @if(tool.transactionList.isEmpty) {
+                                        <form action="@routes.UserPage.addTrans()" method="post">
+                                            <input type="hidden" value="@tool.id" name="tool_id"/>
+                                            <button>Borrow Me</button>
+                                        </form>
+                                        } else {
+                                        @if(transactions.get(transactions.size() - 1).Available) {
+                                            <form action="@routes.UserPage.addTrans()" method="post">
+                                                <input type="hidden" value="@tool.id" name="tool_id"/>
+                                                <button>Borrow Me</button>
+                                            </form>
+                                        }
+                                        }
                                         <form action="@routes.Tools.createComment()" method="post">
-                                            <label for="body">Comment: </label>
+                                            <label for="body">Leave a Comment: </label>
                                             <input type="text" name="body" required>
                                             <br>
                                             <input type="hidden" value="@tool.id" name="tool_id"/>
                                             <button>Submit</button>
                                         </form>
-                                        <form action="@routes.UserPage.addTrans()" method="post">
-                                            <input type="hidden" value="@tool.id" name="tool_id"/>
-                                            @if(transactions == null || transactions.isEmpty || transactions.get(transactions.size() - 1).Available) {
-                                                <button>Borrow Me</button>
-                                            }
-                                        </form>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+
+                                    </td>
+                                    <td>
+                                        <h2>Comments: </h2>
+                                        @for( c <- comments) {
+                                        <li>
+                                            @c.body
+                                            <br>Posted By: @c.user.username
+                                        </li>
+                                        }
                                     </td>
                                 </tr>
                             </table>

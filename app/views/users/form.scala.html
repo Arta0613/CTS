@@ -1,5 +1,7 @@
-@main("Sign Up") {
+@(ttypes: List[model.ToolType])
 
+@main("Sign Up") {
+@header(ttypes)
     <div class="full" style="">
             <!-- NAV AND CONTENT CONTAINER -->
         <div class="container-fluid">
@@ -87,5 +89,4 @@
         </div>
             <!-- NAV AND CONTENT CONTAINER -->
     </div>
-
 }

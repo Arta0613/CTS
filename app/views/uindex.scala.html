@@ -15,8 +15,8 @@
                             <ul class="nav nav-list">
                                 <li class="nav-header">Site Navigation</li>
                                 <li><a href="@routes.Application.logout()">Log Out</a></li>
-                                <li><a href="@routes.Tools.index()">Borrow Tools</a></li>
-                                <li><a href="@routes.ToolTypes.index()">Add Tool Category</a></li>
+                                <li><a href="@routes.Tools.index()">All Tools</a></li>
+                                <li><a href="@routes.Tools.toolform()">Add Tool</a></li>
                             </ul>
                         </div><!--/.well -->
                     </div><!--/span-->
@@ -38,34 +38,24 @@
                             <h2 align="center">A Sharing Service for all Tools</h2>
 
                                 <!-- Carousel -->
-
+                            <!-- Carousel2 -->
                             <div id="main_area">
-                                    <!-- Slider -->
+                                <!-- Slider -->
                                 <div class="row">
                                     <div class="span12" id="slider">
-                                            <!-- Top part of the slider -->
+                                        <!-- Top part of the slider -->
                                         <div class="row">
                                             <div class="span8" id="carousel-bounding-box">
                                                 <div class="carousel slide" id="myCarousel">
-                                                        <!-- Carousel items -->
+                                                    <!-- Carousel items -->
                                                     <div class="carousel-inner">
                                                         <div class="active item" data-slide-number="0">
                                                             <img src="http://pediaa.com/wp-content/uploads/2014/11/What-is-the-Difference-Between-Tools-and-Equipment.jpg"></div>
+                                                        @for(t <- tools){
+                                                        <div class="item" data-slide-number="@t.id">
+                                                            <img src="@t.image" class="img-thumbnail" style="height:450px; width:450px; margin:50px"></div>
+                                                        }
 
-                                                        <div class="item" data-slide-number="1">
-                                                            <img src="http://placehold.it/770x300&text=two"></div>
-
-                                                        <div class="item" data-slide-number="2">
-                                                            <img src="http://placehold.it/770x300&text=three"></div>
-
-                                                        <div class="item" data-slide-number="3">
-                                                            <img src="http://placehold.it/770x300&text=four"></div>
-
-                                                        <div class="item" data-slide-number="4">
-                                                            <img src="http://placehold.it/770x300&text=five"></div>
-
-                                                        <div class="item" data-slide-number="5">
-                                                            <img src="http://placehold.it/770x300&text=six"></div>
                                                     </div><!-- Carousel nav -->
                                                     <a class="carousel-control left" data-slide="prev" href="#myCarousel">
                                                         ‹</a>
@@ -78,81 +68,30 @@
 
                                             <div id="slide-content" style="display: none ;">
                                                 <div id="slide-content-0">
-                                                    <h2>Slider One</h2>
-                                                    <p>Equipment/Tool Difference</p>
-                                                    <p class="sub-text">October 24 2012 - <a href="#">Read more</a></p>
+                                                    <h2>Our Tools!</h2>
+                                                    <p>Equipment Or Tools!</p>
+                                                    <p class="sub-text"><a href="/tools">All Tools!</a></p>
                                                 </div>
-
-                                                <div id="slide-content-1">
-                                                    <h2>Slider Two</h2>
-                                                    <p>Lorem Ipsum Dolor</p>
-                                                    <p class="sub-text">October 24 2012 - <a href="#">Read more</a></p>
+                                                @for(t <- tools){
+                                                <div id="slide-content-@t.id">
+                                                    <h2>@t.name</h2>
+                                                    <p>@t.description</p>
+                                                    <p class="sub-text">
+                                                        Owner: @t.owner.username
+                                                        <br>
+                                                        <a href="/tools/@t.id">More info</a></p>
                                                 </div>
-
-                                                <div id="slide-content-2">
-                                                    <h2>Slider Three</h2>
-                                                    <p>Lorem Ipsum Dolor</p>
-                                                    <p class="sub-text">October 24 2012 - <a href="#">Read more</a></p>
-                                                </div>
-
-                                                <div id="slide-content-3">
-                                                    <h2>Slider Four</h2>
-                                                    <p>Lorem Ipsum Dolor</p>
-                                                    <p class="sub-text">October 24 2012 - <a href="#">Read more</a></p>
-                                                </div>
-
-                                                <div id="slide-content-4">
-                                                    <h2>Slider Five</h2>
-                                                    <p>Lorem Ipsum Dolor</p>
-                                                    <p class="sub-text">October 24 2012 - <a href="#">Read more</a></p>
-                                                </div>
-
-                                                <div id="slide-content-5">
-                                                    <h2>Slider Six</h2>
-                                                    <p>Lorem Ipsum Dolor</p>
-                                                    <p class="sub-text">October 24 2012 - <a href="#">Read more</a></p>
-                                                </div>
+                                                }
                                             </div>
                                         </div>
                                     </div>
-                                </div><!--/Slider-->
-
-                                <div class="row hidden-phone" id="slider-thumbs">
-                                    <div class="span12">
-                                            <!-- Bottom switcher of slider -->
-
-                                        <ul class="thumbnails">
-                                            <li class="span2">
-                                                <a class="thumbnail" id="carousel-selector-0"><img src="http://placehold.it/170x100&text=one"></a>
-                                            </li>
-
-                                            <li class="span2">
-                                                <a class="thumbnail" id="carousel-selector-1"><img src="http://placehold.it/170x100&text=two"></a>
-                                            </li>
-
-                                            <li class="span2">
-                                                <a class="thumbnail" id="carousel-selector-2"><img src="http://placehold.it/170x100&text=three"></a>
-                                            </li>
-
-                                            <li class="span2">
-                                                <a class="thumbnail" id="carousel-selector-3"><img src="http://placehold.it/170x100&text=four"></a>
-                                            </li>
-
-                                            <li class="span2">
-                                                <a class="thumbnail" id="carousel-selector-4"><img src="http://placehold.it/170x100&text=five"></a>
-                                            </li>
-
-                                            <li class="span2">
-                                                <a class="thumbnail" id="carousel-selector-5"><img src="http://placehold.it/170x100&text=six"></a>
-                                            </li>
-                                        </ul>
-                                    </div>
                                 </div>
-                            </div>
-                            <script type="text/javascript"> jQuery(document).ready(function($) {
+                            </div><!--/Slider-->
 
+
+                            <script type="text/javascript"> jQuery(document).ready(function($) {
                                 $('#myCarousel').carousel({
-                                    interval: 5000
+                                    interval: 2000
                                 });
 
                                 $('#carousel-text').html($('#slide-content-0').html());

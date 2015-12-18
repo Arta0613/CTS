@@ -15,8 +15,8 @@
                             <ul class="nav nav-list">
                                 <li class="nav-header">Site Navigation</li>
                                 <li><a href="@routes.Application.logout()">Log Out</a></li>
-                                <li><a href="@routes.Tools.index()">Borrow Tools</a></li>
-                                <li><a href="@routes.ToolTypes.index()">Add Tool Category</a></li>
+                                <li><a href="@routes.Tools.index()">All Tools</a></li>
+                                <li><a href="@routes.Tools.toolform()">Add Tool</a></li>
                             </ul>
                         </div><!--/.well -->
                     </div><!--/span-->
@@ -41,33 +41,59 @@
                                 <ul>
                                 @for( t <- tools) {
                                     @if(t.transactionList.isEmpty) {
-                                        <form action=@routes.UserPage.addTrans() method="post">
-                                            <input type="hidden" value="@t.id" name="tool_id"/>
+                                            <table>
+                                                <tr>
+                                                    <td style="padding:10px">
+                                                        <a href="/tools/@t.id"><img src="@t.image" class="img-thumbnail" width="150" height="150"></a>
+                                                    </td>
 
-                                            <li><h3><a href="/tools/@t.id">@t.name</a></h3>
-                                                <button>Borrow Me</button>
-                                                <br>Type: @t.toolType.name
-                                                <br>Owner: @t.owner.username
-                                            </li>
-                                        </form>
+                                                        <td><h3><a href="/tools/@t.id">@t.name</a></h3>
+                                                                Type: @t.toolType.name
+                                                                <br>Owner: <a href="tools/searchusertools?user=@t.owner.id">@t.owner.username</a>
+                                                    </td>
+                                                    <td style="padding:20px">
+                                                        <form action=@routes.UserPage.addTrans() method="post">
+                                                            <input type="hidden" value="@t.id" name="tool_id"/>
+                                                            <button>Borrow Me</button>
+                                                        </form>
+                                                    </td>
+                                                    </tr>
+                                        </table>
                                     } else {
-                                        @if(transactions.get(transactions.size() - 1).Available) {
-                                            <form action=@routes.UserPage.addTrans() method="post">
-                                                <input type="hidden" value="@t.id" name="tool_id"/>
+                                        @if(transactions.get(transactions.size()-1).Available) {
+                                            <table>
+                                                <tr>
+                                                    <td style="padding:10px">
+                                                        <a href="/tools/@t.id"><img src="@t.image" class="img-thumbnail" width="150" height="150"></a>
+                                                    </td>
 
-                                                <li><h3><a href="/tools/@t.id">@t.name</a></h3>
-                                                    <button>Borrow Me</button>
-                                                    <br>Type: @t.toolType.name
-                                                    <br>Owner: @t.owner.username
-                                                </li>
-                                            </form>
+                                                    <td><h3><a href="/tools/@t.id">@t.name</a></h3>
+                                                            Type: @t.toolType.name
+                                                            <br>Owner: @t.owner.username
+                                                    </td>
+                                                    <td style="padding:20px">
+                                                        <form action=@routes.UserPage.addTrans() method="post">
+                                                            <input type="hidden" value="@t.id" name="tool_id"/>
+                                                            <button>Borrow Me</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         } else {
-                                            <li><h3><a href="/tools/@t.id">@t.name</a></h3>
-                                                <h4> Not Available </h4>
-                                                Type: @t.toolType.name
-                                                <br>Owner: @t.owner.username
-                                            </li>
+                                            <table>
+                                                <tr>
+                                                    <td style="padding:10px">
+                                                        <a href="/tools/@t.id"><img src="@t.image" class="img-thumbnail" width="150" height="150"></a>
+                                                    </td>
 
+                                                    <td>
+                                                    <h3><a href="/tools/@t.id">@t.name</a></h3>
+                                                        <h4> Not Available </h4>
+                                                        Type: @t.toolType.name
+                                                        <br>Owner: @t.owner.username
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         }
                                     }
 
