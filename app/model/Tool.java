@@ -4,13 +4,7 @@ import com.avaje.ebean.Model;
 import play.data.validation.Constraints;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
-
-/**
- * Created by Arman on 11/24/15.
- */
 
 @Entity
 public class Tool extends Model {
@@ -32,7 +26,7 @@ public class Tool extends Model {
     @ManyToOne
     public ToolType toolType;
 
-    @OneToMany(mappedBy = "tool", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "tool", cascade = CascadeType.ALL)
     public List<Comment> commentList;
 
     @OneToMany(mappedBy = "to_borrow")
@@ -42,4 +36,3 @@ public class Tool extends Model {
     public static Finder<Long, Tool> find = new Finder<>(Tool.class);
 
 }
-
